@@ -118,3 +118,24 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes gridPan {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+@keyframes gridRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes floatCube {
+  0%, 100% { 
+    transform: translateY(0) rotate(0deg) scale(0.8);
+    opacity: 0.3;
+  }
+  50% { 
+    transform: translateY(-50px) rotate(180deg) scale(1.2);
+    opacity: 0.6;
+  }
+}
