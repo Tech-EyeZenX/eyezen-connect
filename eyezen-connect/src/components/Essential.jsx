@@ -3,7 +3,7 @@ import { CircularText } from './CircularText';
 
 export function Essential() {
     return (
-        <section className="relative w-full min-h-screen bg-[#E0EAF3] overflow-hidden  px-4 md:px-8">
+        <section className="relative w-full  bg-[#E0EAF3] overflow-hidden  px-4 md:px-8">
             <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-24 flex flex-col items-center">
                 {/* Background Decorative Text */}
                 <motion.div
