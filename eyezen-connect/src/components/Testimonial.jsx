@@ -10,7 +10,7 @@ export function TestMonial() {
       id: 1,
       image: "./doctor.jpg",
       heading: "Our Testimonial",
-      content: "Real time Patient Referrals,Real time Patient Referrals Real time Patient Referrals.  Real time Patient Referrals,Real time Patient Referrals Real time Patient Referrals. Real time Patient Referrals,Real time Patient Referrals Real time Patient Referrals. ",
+      content: "Faster diagnostics and clinical actions Faster diagnostics and clinical actions Faster diagnostics and clinical actions ",
       name: "John Doe",
     },
     {
@@ -136,14 +136,14 @@ export function TestMonial() {
           </motion.div>
 
           {/* Navigation Arrows */}
-          <div className="absolute top-[60vh] left-[70vw] -translate-y-1/2 w-full flex  px-4">
+          <div className="absolute top-[90vh] left-[50vw] md:top-[60vh] md:left-[70vw] -translate-y-1/2 w-full flex  px-4">
             <Button
               variant="ghost"
               size="icon"
               className="rounded-full w-12 h-12 bg-white/80 hover:bg-white"
               onClick={() => setActiveIndex(prev => (prev > 0 ? prev - 1 : data.length - 1))}
             >
-              <ArrowLeft className="text-gray-800" />
+              <ArrowLeft className="text-gray-800" size={35}/>
             </Button>
             <Button
               variant="ghost"
@@ -151,7 +151,7 @@ export function TestMonial() {
               className="rounded-full w-12 h-12 bg-white/80 hover:bg-white"
               onClick={() => setActiveIndex(prev => (prev < data.length - 1 ? prev + 1 : 0))}
             >
-              <ArrowRight className="text-gray-800" />
+              <ArrowRight className="text-gray-800" size={35}/>
             </Button>
           </div>
         </div>

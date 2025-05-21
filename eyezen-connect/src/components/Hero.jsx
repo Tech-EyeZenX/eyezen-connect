@@ -13,7 +13,7 @@ export function Hero() {
             />
             <div className="absolute inset-0 bg-black/10 z-10"></div>
 
-            <nav className="fixed top-4 left-4 right-4 z-50 backdrop-blur-md bg-white/10 rounded-full px-4 py-3 flex items-center justify-between max-w-4xl mx-auto text-white md:px-6">
+            <nav className="fixed top-4 left-4 right-4 z-50 backdrop-blur-md bg-white/40 rounded-full px-4 py-3 flex items-center justify-between max-w-4xl mx-auto text-black md:px-6">
                 {/* Left side - Logo */}
                 <div className="flex items-center space-x-4">
                     <a href="#" className="font-semibold text-sm px-4 py-2 hover:bg-white/20 rounded-full transition-colors">
@@ -41,7 +41,7 @@ export function Hero() {
                 {/* Desktop Right Section */}
                 <div className="hidden md:flex items-center space-x-4">
                     <span className="h-8 border-l-2 px-4">
-                        <a href="#" className="font-semibold text-sm px-4 py-2 hover:bg-white/20 rounded-full transition-colors">
+                        <a href="#" className="font-semibold text-sm px-4 py-2 hover:bg-white/20 rounded-full transition-colors border-2 border-blue-500 animate-pulse">
                             Get Started
                         </a>
                     </span>

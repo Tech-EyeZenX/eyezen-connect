@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export const useScrollActivity = (delay = 200) => {
+export const useScrollActivity = (delay = 100) => {
   const [isScrolling, setIsScrolling] = useState(false);
   useEffect(() => {
     let timeout;
