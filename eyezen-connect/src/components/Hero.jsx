@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 export function Hero() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     return (
@@ -40,11 +41,14 @@ export function Hero() {
 
                 {/* Desktop Right Section */}
                 <div className="hidden md:flex items-center space-x-4">
-                    <span className="h-8 border-l-2 px-4">
-                        <a href="#" className="font-semibold text-sm px-4 py-2 hover:bg-white/20 rounded-full transition-colors border-2 border-blue-500 animate-pulse">
+                    <div className="h-8 border-l-2 px-4 flex items-center">
+                        <Link
+                            to="/auth"
+                            className="font-semibold text-sm px-4 py-2 hover:bg-white/20 rounded-full transition-colors border-2 border-blue-500 animate-pulse"
+                        >
                             Get Started
-                        </a>
-                    </span>
+                        </Link>
+                    </div>
                 </div>
 
                 {/* Mobile Menu Button */}

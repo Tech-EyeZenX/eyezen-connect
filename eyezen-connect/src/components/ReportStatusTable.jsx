@@ -37,7 +37,9 @@ import { FileText, Clock, Plus, Upload } from "lucide-react";
 import { motion } from "framer-motion";
 
 // React
-import { useRef } from "react"
+import { useRef, useState } from "react"
+import { FileUpload } from "./FileUpload";
+import { useNavigate } from "react-router-dom";
 const patients = [
     {
         patientName: "Rakesh Kumar",
@@ -67,10 +69,64 @@ const AnimatedTableRow = ({ children }) => (
 
 export function ReportStatusTable() {
     const fileInputRef = useRef(null);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-    const handleFileBoxClick = () => {
-        fileInputRef.current?.click();
+    const [formData, setFormData] = useState({
+        patientName: '',
+        age: '',
+        gender: 'male',
+        phone: '',
+        visitType: '',
+        eye: '',
+        symptoms: '',
+        knownConditions: [],
+        knownConditionsOther: '',
+        familyHistory: '',
+        lifestyleRisks: [],
+        lifestyleRiskOther: '',
+        duration: '',
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
     };
+
+    const toggleCondition = (condition) => {
+        setFormData((prev) => {
+            const list = [...prev.knownConditions];
+            const index = list.indexOf(condition);
+            if (index > -1) list.splice(index, 1);
+            else list.push(condition);
+            return { ...prev, knownConditions: list };
+        });
+    };
+
+    const toggleLifestyleRisk = (risk) => {
+        setFormData((prev) => {
+            const list = [...prev.lifestyleRisks];
+            const index = list.indexOf(risk);
+            if (index > -1) list.splice(index, 1);
+            else list.push(risk);
+            return { ...prev, lifestyleRisks: list };
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // handle form submit logic
+    };
+    const handleFileSelect = (file) => {
+        setSelectedImage(file);
+    };
+
+    const navigate = useNavigate();
+    const handleAnalyze = () => {
+       navigate("/report")
+    };
+
+
 
     return (
         <div className="p-6"> {/* Padding around the whole block */}
@@ -123,69 +179,107 @@ export function ReportStatusTable() {
             </div>
 
             {/* Centered Add Patient Button */}
-            <div className="flex justify-center mt-6">
-                <Dialog>
+            <div className="flex justify-center mt-6 w-[90%]">
+                <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen} className="w-full">
                     <DialogTrigger asChild>
                         <Button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md">
                             <Plus className="h-4 w-4 mr-2" /> Add Patient
                         </Button>
                     </DialogTrigger>
 
-                    <DialogContent className="max-h-[90vh] w-full overflow-y-auto">
+                    <DialogContent className="max-h-[90vh] w-full md:min-w-[600px] lg:max-w-3xl xl:max-w-4xl overflow-y-auto mx-auto px-6">
                         <DialogHeader>
                             <DialogTitle className="text-xl">New Patient Details</DialogTitle>
                             <DialogDescription>
                                 Fill in the patient details below.
                             </DialogDescription>
                         </DialogHeader>
-
-                        <div className="grid gap-4 py-4">
+                        <form onSubmit={handleSubmit} className="grid gap-4 py-4">
                             <div className="grid gap-4 py-4">
+                                {/* Patient Name */}
                                 <div className="space-y-2">
                                     <Label htmlFor="patient-name">Patient Name</Label>
-                                    <Input id="patient-name" placeholder="Rakesh Kumar" />
+                                    <Input
+                                        id="patient-name"
+                                        name="patientName"
+                                        placeholder="Enter patient name"
+                                        value={formData.patientName}
+                                        onChange={handleChange}
+                                    />
                                 </div>
 
+                                {/* Age & Gender */}
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="space-y-2">
                                         <Label htmlFor="age">Age</Label>
-                                        <Input type="number" id="age" placeholder="35" />
+                                        <Input
+                                            type="number"
+                                            id="age"
+                                            name="age"
+                                            placeholder="Enter patient age"
+                                            value={formData.age}
+                                            onChange={handleChange}
+                                        />
                                     </div>
+
                                     <div className="space-y-2">
                                         <Label>Gender</Label>
-                                        <RadioGroup defaultValue="male" className="flex gap-4">
-                                            <div className="flex items-center gap-2">
-                                                <RadioGroupItem value="male" id="male" />
-                                                <Label htmlFor="male">Male</Label>
-                                            </div>
-                                            <div className="flex items-center gap-2">
-                                                <RadioGroupItem value="female" id="female" />
-                                                <Label htmlFor="female">Female</Label>
-                                            </div>
+                                        <RadioGroup
+                                            name="gender"
+                                            value={formData.gender}
+                                            onValueChange={(value) => setFormData({ ...formData, gender: value })}
+                                            className="flex gap-4"
+                                        >
+                                            {["male", "female", "other"].map((gender) => (
+                                                <div key={gender} className="flex items-center gap-2">
+                                                    <RadioGroupItem value={gender} id={gender} />
+                                                    <Label htmlFor={gender}>{gender.charAt(0).toUpperCase() + gender.slice(1)}</Label>
+                                                </div>
+                                            ))}
                                         </RadioGroup>
                                     </div>
                                 </div>
 
-                                <div className="space-y-2">
+                                {/* Phone Number */}
+                                <div>
                                     <Label htmlFor="phone-number">Phone Number</Label>
                                     <div className="flex gap-2">
-                                        <span className="inline-flex items-center px-3 border rounded-md bg-muted text-sm">
+                                        <span className="inline-flex items-center px-3 rounded-md border border-gray-300 bg-gray-100 text-sm text-gray-700">
                                             +91
                                         </span>
-                                        <Input id="phone-number" placeholder="8825625412" />
+                                        <Input
+                                            id="phone-number"
+                                            name="phone"
+                                            type="tel"
+                                            placeholder="Enter patient phone number"
+                                            className="flex-1"
+                                            value={formData.phone}
+                                            onChange={handleChange}
+                                        />
                                     </div>
                                 </div>
 
-                                <div className="space-y-2">
+                                {/* Visit Type */}
+                                <div>
                                     <Label htmlFor="visit-type">Visit Type</Label>
-                                    <Input id="visit-type" placeholder="Follow-up" />
+                                    <Input
+                                        id="visit-type"
+                                        name="visitType"
+                                        placeholder="Follow-up"
+                                        value={formData.visitType}
+                                        onChange={handleChange}
+                                    />
                                 </div>
 
-                               
-
+                                {/* Select Eye */}
                                 <div className="space-y-2">
                                     <Label>Select Eye</Label>
-                                    <RadioGroup className="flex gap-4">
+                                    <RadioGroup
+                                        name="eye"
+                                        value={formData.eye}
+                                        onValueChange={(value) => setFormData({ ...formData, eye: value })}
+                                        className="flex gap-4"
+                                    >
                                         {["Right", "Left", "Both"].map((eye) => (
                                             <div key={eye} className="flex items-center gap-2">
                                                 <RadioGroupItem value={eye.toLowerCase()} id={eye.toLowerCase()} />
@@ -195,24 +289,12 @@ export function ReportStatusTable() {
                                     </RadioGroup>
                                 </div>
 
-                             
-
+                                {/* File Upload */}
                                 <div className="space-y-2">
-                                    <Label>Upload Image</Label>
-                                    <div
-                                        onClick={handleFileBoxClick}
-                                        className="border-2 border-dashed rounded-lg p-8 text-center cursor-pointer hover:border-primary transition-colors group"
-                                    >
-                                        <div className="flex flex-col items-center gap-2">
-                                            <Upload className="h-8 w-8 text-muted-foreground group-hover:text-primary" />
-                                            <p className="text-muted-foreground">
-                                                <span className="text-primary">Drag & drop files</span> or Browse
-                                            </p>
-                                            <p className="text-sm text-muted-foreground">
-                                                Supported formats: JPEG, PNG
-                                            </p>
-                                        </div>
-                                    </div>
+                                    <FileUpload
+                                        onFileSelect={handleFileSelect}
+                                        selectedFile={selectedImage}
+                                    />
                                     <Input
                                         ref={fileInputRef}
                                         type="file"
@@ -220,73 +302,105 @@ export function ReportStatusTable() {
                                         accept="image/jpeg,image/png"
                                     />
                                 </div>
-                            </div>
 
-                           
-                         
-
-                            {/* Add new medical history fields */}
-                            <div className="space-y-2">
-                                <Label>Symptoms Noted</Label>
-                                <Input placeholder="Blurry vision, floaters, eye strain, etc." />
-                            </div>
-
-                            <div className="space-y-2">
-                                <Label>Known Conditions</Label>
-                                <div className="grid grid-cols-2 gap-2">
-                                    {["Diabetes", "Hypertension", "Glaucoma", "Myopia", "ARMD", "Others"].map((condition) => (
-                                        <div key={condition} className="flex items-center gap-2">
-                                            <Checkbox id={condition} />
-                                            <Label htmlFor={condition} className="text-sm">
-                                                {condition}
-                                            </Label>
-                                        </div>
-                                    ))}
+                                {/* Symptoms */}
+                                <div className="space-y-2">
+                                    <Label>Symptoms Noted</Label>
+                                    <Input
+                                        name="symptoms"
+                                        placeholder="Blurry vision, floaters, eye strain, etc."
+                                        value={formData.symptoms}
+                                        onChange={handleChange}
+                                    />
                                 </div>
-                                <Input placeholder="If others, specify condition" />
-                            </div>
 
-                            <div className="space-y-2">
-                                <Label>Family History</Label>
-                                <Input placeholder="Eye disease, diabetes, etc." />
-                            </div>
-
-                            <div className="space-y-2">
-                                <Label>Lifestyle Risk Tags</Label>
-                                <div className="grid grid-cols-2 gap-2">
-                                    {["Smoking", "Alcohol Use", "Long Screen Exposure", "Others"].map((risk) => (
-                                        <div key={risk} className="flex items-center gap-2">
-                                            <Checkbox id={risk} />
-                                            <Label htmlFor={risk} className="text-sm">
-                                                {risk}
-                                            </Label>
-                                        </div>
-                                    ))}
+                                {/* Known Conditions */}
+                                <div className="space-y-2">
+                                    <Label>Known Conditions</Label>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        {["Diabetes", "Hypertension", "Glaucoma", "Myopia", "ARMD", "Others"].map((condition) => (
+                                            <div key={condition} className="flex items-center gap-2">
+                                                <Checkbox
+                                                    id={condition}
+                                                    name="knownConditions"
+                                                    value={condition}
+                                                    checked={formData.knownConditions.includes(condition)}
+                                                    onCheckedChange={() => toggleCondition(condition)}
+                                                />
+                                                <Label htmlFor={condition}>{condition}</Label>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <Input
+                                        placeholder="If others, specify condition"
+                                        name="knownConditionsOther"
+                                        value={formData.knownConditionsOther}
+                                        onChange={handleChange}
+                                    />
                                 </div>
-                                <Input placeholder="If others, specify condition" />
-                            </div>
 
-                            <div className="space-y-2">
-                                <Label>Duration of Complaint</Label>
-                                <Select>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select duration" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="1-6">1-6 months</SelectItem>
-                                        <SelectItem value="6-12">6-12 months</SelectItem>
-                                        <SelectItem value="1+">More than 1 year</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                            </div>
-                        </div>
+                                {/* Family History */}
+                                <div className="space-y-2">
+                                    <Label>Family History</Label>
+                                    <Input
+                                        name="familyHistory"
+                                        placeholder="Eye disease, diabetes, etc."
+                                        value={formData.familyHistory}
+                                        onChange={handleChange}
+                                    />
+                                </div>
 
-                        <div className="flex justify-end gap-2">
-                            <Button variant="outline">Cancel</Button>
-                            <Button className="gap-2 bg-green-600 hover:bg-green-700 text-white">
-                                <Plus className="h-4 w-4" /> Add Patient
+                                {/* Lifestyle Risks */}
+                                <div className="space-y-2">
+                                    <Label>Lifestyle Risk Tags</Label>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        {["Smoking", "Alcohol Use", "Long Screen Exposure", "Others"].map((risk) => (
+                                            <div key={risk} className="flex items-center gap-2">
+                                                <Checkbox
+                                                    id={risk}
+                                                    name="lifestyleRisks"
+                                                    value={risk}
+                                                    checked={formData.lifestyleRisks.includes(risk)}
+                                                    onCheckedChange={() => toggleLifestyleRisk(risk)}
+                                                />
+                                                <Label htmlFor={risk}>{risk}</Label>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <Input
+                                        placeholder="If others, specify condition"
+                                        name="lifestyleRiskOther"
+                                        value={formData.lifestyleRiskOther}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+
+                                {/* Duration of Complaint */}
+                                <div className="space-y-2">
+                                    <Label>Duration of Complaint</Label>
+                                    <Select
+                                        value={formData.duration}
+                                        onValueChange={(value) => setFormData({ ...formData, duration: value })}
+                                    >
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select duration" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="1-6">1-6 months</SelectItem>
+                                            <SelectItem value="6-12">6-12 months</SelectItem>
+                                            <SelectItem value="1+">More than 1 year</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div className="flex justify-center gap-2">
+                            <Button onClick={handleAnalyze} className="bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-700 hover:to-emerald-600 text-white font-semibold px-6 py-2 rounded-md shadow-md transition duration-300 ease-in-out hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2">
+                                Analyze
                             </Button>
                         </div>
+
                     </DialogContent>
                 </Dialog>
             </div>

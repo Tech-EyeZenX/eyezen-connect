@@ -57,6 +57,7 @@ const AnimatedCard = ({ children }) => (
 
 export function OptometricDashBoard() {
     const [isOpen, setIsOpen] = useState(false);
+    
 
     const navItems = [
         { path: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
@@ -214,7 +215,7 @@ export function OptometricDashBoard() {
                     <h2 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 text-[#11C099]">Report Status</h2>
 
                     <div className="overflow-x-auto">
-                        <ReportStatusTable />
+                        <ReportStatusTable  />
                     </div>
                 </div>
 

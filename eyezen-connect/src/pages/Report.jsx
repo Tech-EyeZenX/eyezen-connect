@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge'; // Make sure you have this Badge component
+import { Badge } from '@/components/ui/badge'; 
 
 export function Report() {
   const [imageFile, setImageFile] = useState(null);
@@ -73,50 +73,32 @@ export function Report() {
   fetchData();
 }, [imageFile]);
 
+useEffect(() => {
+    const loadTestImage = async () => {
+      try {
+        // Fetch the test image from public directory
+        const response = await fetch('/test-image4.jpg');
+        const blob = await response.blob();
+        
+        // Create a File object from the blob
+        const testFile = new File([blob], 'test-image4.jpg', {
+          type: blob.type,
+          lastModified: Date.now()
+        });
 
-  const renderBoundingBoxes = (detections, color) => {
-    return detections.map((detection, index) => (
-      <div
-        key={index}
-        className="absolute border-2 rounded-lg"
-        style={{
-          borderColor: color,
-          left: `${detection.bbox[0]}px`,
-          top: `${detection.bbox[1]}px`,
-          width: `${detection.bbox[2] - detection.bbox[0]}px`,
-          height: `${detection.bbox[3] - detection.bbox[1]}px`
-        }}
-      >
-        <span className="text-xs font-bold px-1 absolute -top-4 left-0" style={{ color }}>
-          {(detection.score || detection.confidence * 100).toFixed(1)}%
-        </span>
-      </div>
-    ));
-  };
+        // Set the file to trigger processing
+        setImageFile(testFile);
+      } catch (err) {
+        setError('Failed to load test image');
+      }
+    };
 
-  if (!imageFile) {
-    return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="flex flex-col items-center justify-center h-96 space-y-4"
-      >
-        <label className="flex flex-col items-center px-4 py-6 bg-white text-blue-600 rounded-lg shadow-lg tracking-wide uppercase border border-blue-600 cursor-pointer hover:bg-blue-50 hover:text-blue-700 transition-colors duration-200">
-          <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
-          </svg>
-          <span className="mt-2 text-sm">Select Fundus Image</span>
-          <input
-            type="file"
-            accept="image/*"
-            className="hidden"
-            onChange={handleImageUpload}
-          />
-        </label>
-        <p className="text-gray-500 text-sm">Supported formats: JPEG, PNG</p>
-      </motion.div>
-    );
-  }
+    // Only load test image if no file is selected
+    if (!imageFile) {
+      loadTestImage();
+    }
+  }, []);
+
 
   if (isLoading) {
     return (
