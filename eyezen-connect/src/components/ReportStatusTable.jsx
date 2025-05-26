@@ -35,7 +35,7 @@ import { FileText, Clock, Plus, Upload } from "lucide-react";
 
 // Animation
 import { motion } from "framer-motion";
-
+import { ToastContainer, toast } from 'react-toastify'
 // React
 import { useRef, useState } from "react"
 import { FileUpload } from "./FileUpload";
@@ -123,7 +123,8 @@ export function ReportStatusTable() {
 
     const navigate = useNavigate();
     const handleAnalyze = () => {
-       navigate("/report")
+        setIsDialogOpen(!isDialogOpen);
+        toast("Patient details sent to the doctor successfully!")
     };
 
 
@@ -131,6 +132,7 @@ export function ReportStatusTable() {
     return (
         <div className="p-6"> {/* Padding around the whole block */}
             <div className="rounded-md border overflow-hidden shadow-sm">
+                  <ToastContainer className="text-green-600" />
                 <Table>
                     <TableHeader className="bg-muted/50">
                         <TableRow>
@@ -397,8 +399,9 @@ export function ReportStatusTable() {
 
                         <div className="flex justify-center gap-2">
                             <Button onClick={handleAnalyze} className="bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-700 hover:to-emerald-600 text-white font-semibold px-6 py-2 rounded-md shadow-md transition duration-300 ease-in-out hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2">
-                                Analyze
+                                Send for Analysis
                             </Button>
+                          
                         </div>
 
                     </DialogContent>

@@ -4,6 +4,9 @@ import { Report } from "./pages/Report";
 import { ReportModel2 } from "./pages/ReportModel2";
 import { OptometricDashBoard } from "./pages/OptometricDashBoard";
 import Auth from "./pages/Auth";
+import { DoctorDashBoard } from "./pages/DoctorDashBoard";
+import { PatientReport } from "./pages/PatientReport";
+import { FinalReport } from "./pages/FinalReport";
 
 
 
@@ -19,6 +22,9 @@ function App() {
         <Route path ="/optometricdashboard" element = {<OptometricDashBoard/>}/>
         {/* log in Page  */}
         <Route path = "/auth" element = {<Auth/>}/>
+        <Route path = "/doctor-dashboard" element = {<DoctorDashBoard/>}/>
+        <Route path = "/patient-report" element = {<PatientReport/>}/>
+        <Route path = "/patient-final-report" element = {<FinalReport/>}/>
       </Routes>
     </div>
   );

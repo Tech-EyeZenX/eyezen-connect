@@ -17,6 +17,8 @@ function Auth() {
         console.log(role);
         if(role==="Optometrist"){
             navigate("/optometricdashboard");
+        }else{
+            navigate("/doctor-dashboard");
         }
     }
     return (
