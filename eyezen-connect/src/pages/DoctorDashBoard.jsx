@@ -50,7 +50,7 @@ export function DoctorDashBoard() {
 
     const navItems = [
         { path: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
-        { path: "/patient-overview", icon: User, label: "Patients Overview" },
+    
 
         {
             path: "/diagnosis-result",
