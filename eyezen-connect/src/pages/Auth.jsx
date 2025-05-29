@@ -144,14 +144,14 @@ function Auth() {
                                         </div>
 
                                         <div>
+                                            <label className='block mb-1 text-sm font-medium'>Optical Shop Registration Number</label>
+                                            <Input placeholder="Enter your Optical shop Registration Number" />
+                                        </div>
+                                        <div>
                                             <label className='block mb-1 text-sm font-medium'>Address</label>
                                             <Input placeholder="Enter your address" />
                                         </div>
 
-                                        <div>
-                                            <label className='block mb-1 text-sm font-medium'>Optical Shop Registration Number</label>
-                                            <Input placeholder="Enter your Optical shop Registration Number" />
-                                        </div>
                                       
                                         {role=== "doctor" && (
                                             <div>
