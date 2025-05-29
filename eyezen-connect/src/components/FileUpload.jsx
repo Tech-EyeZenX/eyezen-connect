@@ -3,9 +3,11 @@ import { motion } from "framer-motion";
 import {Label} from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Upload } from "lucide-react";
+import { ImagePreview } from "./ImagePreview";
 export const FileUpload = ({ onFileSelect, selectedFile }) => {
     const fileInputRef = useRef(null);
     const [isDragging, setIsDragging] = useState(false);
+    const [image , setImage] = useState(null);
 
     const handleFileBoxClick = () => {
         fileInputRef.current?.click();
@@ -15,6 +17,7 @@ export const FileUpload = ({ onFileSelect, selectedFile }) => {
         const file = e.target.files?.[0];
         if (file) {
             onFileSelect(file);
+            setImage(file);
         }
     };
 
@@ -68,6 +71,7 @@ export const FileUpload = ({ onFileSelect, selectedFile }) => {
                             Selected: {selectedFile.name}
                         </motion.div>
                     )}
+                    {image && <ImagePreview image = {image}/>}
                 </div>
             </div>
             <Input

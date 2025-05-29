@@ -11,16 +11,24 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { motion } from "framer-motion";
 import { Plus, Upload } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { ImagePreview } from "./ImagePreview";
 
 const MotionDialogContent = motion(DialogContent);
 
 export function NewPatientDialog() {
-    const fileInputRef = useRef<HTMLInputElement | null>(null);
+    const fileInputRef = useRef(null);
+    const [image, setImage] = useState(null);
+
+
+
 
     const handleFileBoxClick = () => {
-        fileInputRef.current?.click();
+        if (fileInputRef.current) {
+            fileInputRef.current.click();
+        }
     };
+
 
     return (
         <Dialog>
@@ -86,11 +94,11 @@ export function NewPatientDialog() {
                         <Input id="visit-type" placeholder="Follow-up" />
                     </div>
 
-                    {/* Image Quality */}
+                    {/* Image Quality
                     <div className="space-y-2">
                         <Label htmlFor="image-quality">Image Quality</Label>
                         <Input id="image-quality" placeholder="Blurry" />
-                    </div>
+                    </div> */}
 
                     {/* Select Eye */}
                     <div className="space-y-2">
@@ -105,11 +113,7 @@ export function NewPatientDialog() {
                         </RadioGroup>
                     </div>
 
-                    {/* Capture Source */}
-                    <div className="space-y-2">
-                        <Label htmlFor="capture-source">Capture Source</Label>
-                        <Input id="capture-source" placeholder="Mobile Upload" />
-                    </div>
+
 
                     {/* File Upload */}
                     <div className="space-y-2">
@@ -127,14 +131,21 @@ export function NewPatientDialog() {
                                     Supported formats: JPEG, PNG
                                 </p>
                             </div>
-                        </div>
-                        <Input
+                        <input
                             ref={fileInputRef}
                             type="file"
                             className="hidden"
                             accept="image/jpeg,image/png"
+                            onChange={(e) => {
+                                if (e.target.files && e.target.files[0]) {
+                                    console.log("File selected:", e.target.files[0]);
+                                    setImage(e.target.files[0]);
+                                }
+                            }}
                         />
+                        </div>
                     </div>
+                   
                 </div>
 
                 <div className="flex justify-end gap-2">

@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 
-const ImagePreview = ({ image }) => {
+export const ImagePreview = ({ image }) => {
     const [preview, setPreview] = useState(null);
 
+    console.log(image);
+    
+   
     useEffect(() => {
         const reader = new FileReader();
         reader.onloadend = () => setPreview(reader.result);
@@ -15,7 +18,7 @@ const ImagePreview = ({ image }) => {
 
     return (
         <div className="mt-4 p-4 border rounded-lg">
-            <h3 className="text-lg font-semibold mb-2">Image Preview</h3>
+            <h3 className="text-lg font-semibold mb-2">Selected Image</h3>
             {preview && (
                 <img 
                     src={preview} 

@@ -71,6 +71,9 @@ export function ReportStatusTable() {
     const fileInputRef = useRef(null);
     const [selectedImage, setSelectedImage] = useState(null);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [description, setDescription] = useState('');
+    const [imageName, setImageName] = useState('');
+    const [innerDialogOpen, setInnerDialogOpen] = useState(false);
 
     const [formData, setFormData] = useState({
         patientName: '',
@@ -79,7 +82,10 @@ export function ReportStatusTable() {
         phone: '',
         visitType: '',
         eye: '',
-        symptoms: '',
+        symptoms: {
+            affected:"",
+            duration: "",
+        },
         knownConditions: [],
         knownConditionsOther: '',
         familyHistory: '',
@@ -127,12 +133,24 @@ export function ReportStatusTable() {
         toast("Patient details sent to the doctor successfully!")
     };
 
+    const HandleCloseDialog = () => {
+        setInnerDialogOpen(!innerDialogOpen);
+        setSelectedImage(null);
+        setDescription('');
+        setImageName('');
+        fileInputRef.current.value = null; // Reset file input
+        toast("Image upload cancelled.");
+    }
 
+    const HandleUploadImage = () => {
+        setInnerDialogOpen(!innerDialogOpen);
+        toast("Image uploaded successfully!");
+    }
 
     return (
         <div className="p-6"> {/* Padding around the whole block */}
             <div className="rounded-md border overflow-hidden shadow-sm">
-                  <ToastContainer className="text-green-600" />
+                <ToastContainer className="text-green-600" />
                 <Table>
                     <TableHeader className="bg-muted/50">
                         <TableRow>
@@ -184,7 +202,7 @@ export function ReportStatusTable() {
             <div className="flex justify-center mt-6 w-[90%]">
                 <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen} className="w-full">
                     <DialogTrigger asChild>
-                        <Button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md">
+                        <Button className="bg-[#00B07E] hover:bg-[#00B07E]/70 text-white px-6 py-2 rounded-md">
                             <Plus className="h-4 w-4 mr-2" /> Add Patient
                         </Button>
                     </DialogTrigger>
@@ -292,28 +310,98 @@ export function ReportStatusTable() {
                                 </div>
 
                                 {/* File Upload */}
-                                <div className="space-y-2">
-                                    <FileUpload
-                                        onFileSelect={handleFileSelect}
-                                        selectedFile={selectedImage}
-                                    />
-                                    <Input
-                                        ref={fileInputRef}
-                                        type="file"
-                                        className="hidden"
-                                        accept="image/jpeg,image/png"
-                                    />
-                                </div>
+                                <Dialog open={innerDialogOpen} onOpenChange={setInnerDialogOpen}>
+                                    <DialogTrigger asChild>
+                                        <Button className="gap-2 bg-[#00B07E] hover:bg-[#00B07E]/90 text-white px-6 py-4 rounded-md">
+                                            <Upload className="h-8 w-6" />
+                                            Upload the Image
+                                        </Button>
+
+                                    </DialogTrigger>
+                                    <DialogContent className="sm:max-w-[500px] max-h-[calc(100vh-2rem)] overflow-y-auto" >
+                                        <DialogHeader className="text-center sm:text-left">
+                                            <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+                                                Upload Image
+                                            </DialogTitle>
+                                            <DialogDescription className="text-muted-foreground">
+                                                Add visual documentation for better diagnosis
+                                            </DialogDescription>
+                                        </DialogHeader>
+
+                                        <div className="space-y-2">
+                                            {/* Existing File Upload */}
+                                            <FileUpload
+                                                onFileSelect={handleFileSelect}
+                                                selectedFile={selectedImage}
+                                            />
+                                            <Input
+                                                ref={fileInputRef}
+                                                type="file"
+                                                className="hidden"
+                                                accept="image/jpeg,image/png"
+                                            />
+
+                                            {/* New Image Name Field */}
+                                            <div className="space-y-2">
+                                                <Label htmlFor="image-name">Image Name</Label>
+                                                <Input
+                                                    id="image-name"
+                                                    placeholder="Enter image name"
+                                                    value={imageName}
+                                                    onChange={(e) => setImageName(e.target.value)}
+                                                />
+                                            </div>
+
+                                            {/* New Description Field */}
+                                            <div className="space-y-2">
+                                                <Label htmlFor="image-description">Image Description</Label>
+                                                <textarea
+                                                    id="image-description"
+                                                    placeholder="Enter image description"
+                                                    className="w-full px-3 py-2 border rounded-md min-h-[100px]"
+                                                    value={description}
+                                                    onChange={(e) => setDescription(e.target.value)}
+                                                />
+                                            </div>
+
+                                            <div className="sticky bottom-0 bg-background pt-4 -mx-6 px-6 border-t">
+                                                <div className="flex flex-col-reverse sm:flex-row gap-2 sm:justify-end">
+                                                    <Button variant="destructive" className="w-full sm:w-auto"
+                                                        onClick={HandleCloseDialog}
+                                                    >
+                                                        Cancel
+                                                    </Button>
+                                                    <Button className="w-full sm:w-auto gap-2 bg-primary/90 hover:bg-primary"
+                                                        onClick={HandleUploadImage}
+
+                                                    >
+                                                        <Upload className="h-4 w-4" /> Upload
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </DialogContent>
+                                </Dialog>
 
                                 {/* Symptoms */}
                                 <div className="space-y-2">
                                     <Label>Symptoms Noted</Label>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                                     <Input
                                         name="symptoms"
                                         placeholder="Blurry vision, floaters, eye strain, etc."
-                                        value={formData.symptoms}
+                                        value={formData.symptoms.affected}
                                         onChange={handleChange}
                                     />
+
+                                    <Input
+                                        name="duration"
+                                        placeholder="how long the symptoms have been present"
+                                        value={formData.symptoms.duration}
+                                        onChange={handleChange}
+                                    />
+
+                                    </div>
                                 </div>
 
                                 {/* Known Conditions */}
@@ -398,10 +486,10 @@ export function ReportStatusTable() {
                         </form>
 
                         <div className="flex justify-center gap-2">
-                            <Button onClick={handleAnalyze} className="bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-700 hover:to-emerald-600 text-white font-semibold px-6 py-2 rounded-md shadow-md transition duration-300 ease-in-out hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2">
+                            <Button onClick={handleAnalyze} className="bg-[#00B07E] hover:bg-[#00B07E]/70 text-white font-semibold px-6 py-2 rounded-md shadow-md transition duration-300 ease-in-out hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2">
                                 Send for Analysis
                             </Button>
-                          
+
                         </div>
 
                     </DialogContent>

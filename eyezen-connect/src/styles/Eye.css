@@ -251,6 +251,191 @@ body {
   transform: scale(1.1);
 }
 
+/* viterouse  */
+
+.vitreous-label {
+  position: absolute;
+   top: 15%;
+  right:20%;
+  display: flex;
+  justify-content: center;
+}
+
+.vitreous-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+  padding: 2px 4px;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.vitreous-line-1 {
+  position: absolute;
+  top: 10vh;
+  right: 32vw;
+  width: 0.5px;
+  height: 210px;
+  border-left:3px dotted green;
+  transform: rotate(55.5deg);
+}
+
+.vitreous-line-2 {
+  position: absolute;
+  top: 36%;
+  right: 55%;
+  width: 0.5px;
+  height: 250px;
+  border-left: 2px dotted green;
+  transform: rotate(77.5deg);
+}
+
+.vitreous-inputs {
+  position: absolute;
+  top: 30%;
+  right: 14%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  
+}
+
+/* Shared styles */
+.marker-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.color-box {
+  width: 24px;
+  height: 24px;
+  border: 1px solid gray;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.color-box:hover {
+  transform: scale(1.05);
+}
+
+.color-picker {
+  position: absolute;
+  top: 0;
+  left: 110%;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 6px;
+  border-radius: 6px;
+  display: flex;
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.color-option {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.color-option:hover {
+  transform: scale(1.1);
+}
+
+.retina-label {
+  position: absolute;
+  top: 82%;
+  right: 46%;
+  display: flex;
+  justify-content: center;
+}
+
+.retina-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+  padding: 4px 8px;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.retina-line-diagonal {
+  position: absolute;
+  top: 66%;
+  right: 49%;
+  width: 0.5px;
+  height: 60px;
+  border-left: 2px dotted green;
+  transform: rotate(180deg);
+}
+
+.retina-inputs {
+  position: absolute;
+  top: 90%;
+  right: 38%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+}
+
+/* Shared styles */
+.marker-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.color-box {
+  width: 24px;
+  height: 24px;
+  border: 1px solid gray;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.color-box:hover {
+  transform: scale(1.05);
+}
+
+.color-picker {
+  position: absolute;
+  top: 0;
+  left: 110%;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 6px;
+  border-radius: 6px;
+  display: flex;
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.color-option {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.color-option:hover {
+  transform: scale(1.1);
+}
 
 
 .choroid-label {
@@ -524,192 +709,10 @@ body {
 
 
 
-.retina-label {
-  position: absolute;
-  top: 75%;
-  right: 50%;
-  display: flex;
-  justify-content: center;
-}
-
-.retina-text {
-  font-size: 18px;
-  font-weight: bold;
-  color: black;
-  padding: 4px 8px;
-  background: white;
-  border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-.retina-line-diagonal {
-  position: absolute;
-  top: 60%;
-  right: 49%;
-  width: 0.5px;
-  height: 80px;
-  border-left: 2px dotted green;
-  transform: rotate(45deg);
-}
-
-.retina-inputs {
-  position: absolute;
-  top: 85%;
-  right: 45%;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
-}
-
-/* Shared styles */
-.marker-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  position: relative;
-}
-
-.color-box {
-  width: 24px;
-  height: 24px;
-  border: 1px solid gray;
-  border-radius: 6px;
-  cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s;
-}
-
-.color-box:hover {
-  transform: scale(1.05);
-}
-
-.color-picker {
-  position: absolute;
-  top: 0;
-  left: 110%;
-  background: white;
-  border: 1px solid #ccc;
-  padding: 6px;
-  border-radius: 6px;
-  display: flex;
-  gap: 6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  z-index: 10;
-}
-
-.color-option {
-  width: 24px;
-  height: 24px;
-  border-radius: 6px;
-  cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s;
-}
-
-.color-option:hover {
-  transform: scale(1.1);
-}
 
 
 
 
-.vitreous-label {
-  position: absolute;
-  top: 75%;
-  right: 67%;
-  display: flex;
-  justify-content: center;
-}
-
-.vitreous-text {
-  font-size: 18px;
-  font-weight: bold;
-  color: black;
-  padding: 4px 8px;
-  background: white;
-  border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-.vitreous-line-1 {
-  position: absolute;
-  top: 42%;
-  right: 60%;
-  width: 0.5px;
-  height: 210px;
-  border-left: 2px dotted green;
-  transform: rotate(72deg);
-}
-
-.vitreous-line-2 {
-  position: absolute;
-  top: 36%;
-  right: 55%;
-  width: 0.5px;
-  height: 250px;
-  border-left: 2px dotted green;
-  transform: rotate(77.5deg);
-}
-
-.vitreous-inputs {
-  position: absolute;
-  top: 85%;
-  right: 66%;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
-}
-
-/* Shared styles */
-.marker-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  position: relative;
-}
-
-.color-box {
-  width: 24px;
-  height: 24px;
-  border: 1px solid gray;
-  border-radius: 6px;
-  cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s;
-}
-
-.color-box:hover {
-  transform: scale(1.05);
-}
-
-.color-picker {
-  position: absolute;
-  top: 0;
-  left: 110%;
-  background: white;
-  border: 1px solid #ccc;
-  padding: 6px;
-  border-radius: 6px;
-  display: flex;
-  gap: 6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  z-index: 10;
-}
-
-.color-option {
-  width: 24px;
-  height: 24px;
-  border-radius: 6px;
-  cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s;
-}
-
-.color-option:hover {
-  transform: scale(1.1);
-}
 
 
 
@@ -739,7 +742,7 @@ body {
 .label-container {
   position: absolute;
   display: flex;
-  align-items: center;
+  top:5vh;
 }
 
 .label-box {
@@ -753,17 +756,23 @@ body {
 }
 
 .dotted-line {
-  width: 250px;
-  border-top: 2px dotted #34d399;
+  position: absolute;
+  top:12vh;
+  left:10vw;
+  width: 400px;
+  border-top: 3px dotted #34d399;
   margin-left: 0.5rem;
+  transform: rotate(24deg);
 }
 
 .marker-section {
   position: absolute;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.3rem;  
   transform: translateX(-50%);
+  top:20vh;
+  left:10vw;
 }
 
 .marker-item {
@@ -817,7 +826,7 @@ body {
 .eyelids-marker {
   position: absolute;
   top: 65%;
-  left: 45%;
+  left: 40%;
   transform: translate(-50%, -50%);
 }
 
