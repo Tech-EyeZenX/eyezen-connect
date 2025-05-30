@@ -83,7 +83,7 @@ export function ReportStatusTable() {
         visitType: '',
         eye: '',
         symptoms: {
-            affected:"",
+            affected: "",
             duration: "",
         },
         knownConditions: [],
@@ -93,6 +93,24 @@ export function ReportStatusTable() {
         lifestyleRiskOther: '',
         duration: '',
     });
+
+
+
+    const symptomsList = [
+        "Blurred Vision",
+        "Difficulty Reading / Eye Strain",
+        "Headache",
+        "Double Vision",
+        "Watering",
+        "Redness",
+        "Itching / Burning",
+        "Light Sensitivity",
+        "Flashes / Floaters",
+        "Night Vision Difficulty",
+        "Glare / Halos",
+        "Dryness / Gritty Feeling",
+        "Frequent Change in Spectacle Power",
+    ];
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -146,6 +164,19 @@ export function ReportStatusTable() {
         setInnerDialogOpen(!innerDialogOpen);
         toast("Image uploaded successfully!");
     }
+
+    const handleMultiSelectChange = (e) => {
+        const selectedOptions = Array.from(e.target.selectedOptions).map(option => option.value);
+        const selectedString = selectedOptions.join(',');
+
+        setFormData(prev => ({
+            ...prev,
+            symptoms: {
+                ...prev.symptoms,
+                affected: selectedString
+            }
+        }));
+    };
 
     return (
         <div className="p-6"> {/* Padding around the whole block */}
@@ -386,47 +417,117 @@ export function ReportStatusTable() {
                                 {/* Symptoms */}
                                 <div className="space-y-2">
                                     <Label>Symptoms Noted</Label>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                                    <Input
-                                        name="symptoms"
-                                        placeholder="Blurry vision, floaters, eye strain, etc."
-                                        value={formData.symptoms.affected}
-                                        onChange={handleChange}
-                                    />
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        {/* Symptoms Dropdown */}
+                                        <div className="relative">
+                                            <Select>
+                                                <SelectTrigger className="h-12 bg-white border border-gray-300 rounded-lg hover:border-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                                    <SelectValue
+                                                        placeholder={
+                                                            <span className="text-gray-500">Select symptoms...</span>
+                                                        }
+                                                    />
+                                                </SelectTrigger>
+                                                <SelectContent className="max-h-60 overflow-y-auto border border-gray-200 rounded-lg shadow-lg bg-white">
+                                                    {symptomsList.map((symptom, index) => (
+                                                        <SelectItem
+                                                            key={index}
+                                                            value={symptom}
+                                                            className="px-4 py-3 hover:bg-gray-50 focus:bg-blue-50 transition-colors cursor-pointer border-b border-gray-100 last:border-b-0  "
+                                                        >
+                                                            {symptom}
+                                                        </SelectItem>
+                                                    ))}
+                                                </SelectContent>
+                                            </Select>
+                                        </div>
 
-                                    <Input
-                                        name="duration"
-                                        placeholder="how long the symptoms have been present"
-                                        value={formData.symptoms.duration}
-                                        onChange={handleChange}
-                                    />
-
+                                        {/* Duration Dropdown */}
+                                        <div className="relative">
+                                            <select
+                                                name="duration"
+                                                value={formData.symptoms.duration}
+                                                onChange={handleChange}
+                                                className="w-full h-12 pl-4 pr-10 bg-white border border-gray-300 rounded-lg appearance-none hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors text-gray-800"
+                                            >
+                                                <option value="" className="text-gray-500">Duration of symptoms</option>
+                                                <option value="< 1 week">&lt; 1 week</option>
+                                                <option value="1-2 weeks">1-2 weeks</option>
+                                                <option value="2-4 weeks">2-4 weeks</option>
+                                                <option value=">1 month">&gt;1 month</option>
+                                            </select>
+                                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3">
+                                                <svg className="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                </svg>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
+
                                 {/* Known Conditions */}
-                                <div className="space-y-2">
-                                    <Label>Known Conditions</Label>
-                                    <div className="grid grid-cols-2 gap-2">
-                                        {["Diabetes", "Hypertension", "Glaucoma", "Myopia", "ARMD", "Others"].map((condition) => (
-                                            <div key={condition} className="flex items-center gap-2">
-                                                <Checkbox
-                                                    id={condition}
-                                                    name="knownConditions"
-                                                    value={condition}
-                                                    checked={formData.knownConditions.includes(condition)}
-                                                    onCheckedChange={() => toggleCondition(condition)}
-                                                />
-                                                <Label htmlFor={condition}>{condition}</Label>
+                                <div className="space-y-4">
+                                    <Label className="text-gray-800 font-medium text-base">Known Conditions</Label>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        {/* Left Column: Conditions Checkboxes */}
+                                        <div className="bg-white border border-gray-200 rounded-lg p-4">
+                                            <div className="grid grid-cols-2 gap-3">
+                                                {["Diabetes", "Hypertension", "Glaucoma", "Myopia", "ARMD", "Others"].map((condition) => (
+                                                    <div key={condition} className="flex items-center gap-2">
+                                                        <Checkbox
+                                                            id={condition}
+                                                            name="knownConditions"
+                                                            value={condition}
+                                                            checked={formData.knownConditions.includes(condition)}
+                                                            onCheckedChange={() => toggleCondition(condition)}
+                                                            className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                                        />
+                                                        <Label htmlFor={condition} className="text-gray-700">{condition}</Label>
+                                                    </div>
+                                                ))}
                                             </div>
-                                        ))}
+                                        </div>
+
+                                        {/* Right Column: Duration Dropdown */}
+                                        <div className="relative">
+                                            <select
+                                                name="duration"
+                                                value={formData.knownConditionsDuration}
+                                                onChange={handleChange}
+                                                className="w-full h-12 pl-4 pr-10 bg-white border border-gray-300 rounded-lg appearance-none hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors text-gray-800"
+                                            >
+                                                <option value="" className="text-gray-500">Duration of condition</option>
+                                                <option value="< 6 months">&lt; 6 months</option>
+                                                <option value="6-12 months">6-12 months</option>
+                                                <option value="> 12 months">&gt; 12 months</option>
+                                                <option value="1-5 years">1-5 years</option>
+                                                <option value="> 5 years">&gt; 5 years</option>
+                                            </select>
+                                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3">
+                                                <svg className="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                </svg>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <Input
-                                        placeholder="If others, specify condition"
-                                        name="knownConditionsOther"
-                                        value={formData.knownConditionsOther}
-                                        onChange={handleChange}
-                                    />
+
+                                    {/* Others Input Field */}
+                                    <div className="relative">
+                                        <Input
+                                            placeholder="If others, specify condition"
+                                            name="knownConditionsOther"
+                                            value={formData.knownConditionsOther}
+                                            onChange={handleChange}
+                                            className="w-full h-12 pl-4 pr-4 bg-white border border-gray-300 rounded-lg hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors text-gray-800"
+                                        />
+                                        <div className="absolute inset-y-0 right-0 flex items-center px-3">
+                                            <svg className="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 {/* Family History */}
