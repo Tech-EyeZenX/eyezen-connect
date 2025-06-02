@@ -4,9 +4,11 @@ import { Report } from "./pages/Report";
 import { ReportModel2 } from "./pages/ReportModel2";
 import { OptometricDashBoard } from "./pages/OptometricDashBoard";
 import Auth from "./pages/Auth";
-import { DoctorDashBoard } from "./pages/DoctorDashBoard";
+
 import { PatientReport } from "./pages/PatientReport";
 import { FinalReport } from "./pages/FinalReport";
+import { DoctorDashBoard } from "./pages/DoctorDashBoard";
+
 
 
 
