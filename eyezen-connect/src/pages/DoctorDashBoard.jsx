@@ -131,14 +131,14 @@ export function DoctorDashBoard() {
     return (
         <div className="flex min-h-screen w-full flex-row overflow-hidden bg-gradient-to-br from-[#f0fdfa] via-[#e0f2f1] to-[#d1f5f0]">
             {/* Desktop Sidebar */}
-            <motion.aside 
+            <motion.aside
                 initial={{ x: -100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.5 }}
                 className="hidden lg:block fixed top-0 left-0 h-full w-64 border-r bg-gradient-to-b from-[#00694B] via-[#008a5e] to-[#00CF94] shadow-xl"
             >
                 <div className="flex h-full flex-col gap-4 p-4">
-                    <motion.div 
+                    <motion.div
                         whileHover={{ scale: 1.03 }}
                         className="flex items-center gap-3 pb-4 border-b border-white/20"
                     >
@@ -226,41 +226,68 @@ export function DoctorDashBoard() {
             {/* Main Content */}
             <div className="flex-1 lg:ml-64 p-2 sm:p-4 min-h-screen">
                 {/* Header */}
-                <motion.header 
+                <motion.header
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                     className="w-full bg-gradient-to-r from-[#00694B] to-[#00a56e] px-3 py-2 sm:px-4 sm:py-3 shadow-lg rounded-xl mb-4 sm:mb-6"
                 >
-                    <div className="flex flex-col sm:flex-row items-center justify-between gap-2 max-w-7xl mx-auto">
-                        <div className="flex items-center gap-2 sm:gap-4">
-                            <Avatar className="border-2 border-white w-8 h-8 sm:w-10 sm:h-10">
-                                <AvatarImage src="/doctor-avatar.jpg" alt="Dr. Selva" />
-                                <AvatarFallback className="bg-[#00CF94] text-white text-xs sm:text-base">DS</AvatarFallback>
-                            </Avatar>
-                            <div>
-                                <h1 className="text-white text-sm sm:text-xl font-bold">Welcome, Dr. Selva</h1>
-                                <p className="text-white/90 text-xs sm:text-sm">Ophthalmologist | Last login: Today, 08:45 AM</p>
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-2 max-w-2xl md:max-w-7xl mx-auto w-full">
+                        {/* Doctor Info */}
+                        <div className="flex items-center gap-2 sm:gap-4 w-full sm:w-auto justify-between sm:justify-start">
+                            <div className="flex items-center gap-2 sm:gap-4">
+                                <Avatar className="border-2 border-white w-8 h-8 sm:w-10 sm:h-10">
+                                    <AvatarImage src="/doctor-avatar.jpg" alt="Dr. Selva" />
+                                    <AvatarFallback className="bg-[#00CF94] text-white text-xs sm:text-base">
+                                        DS
+                                    </AvatarFallback>
+                                </Avatar>
+                                <div>
+                                    <h1 className="text-white text-sm sm:text-xl font-bold">
+                                        Welcome, Dr. Selva
+                                    </h1>
+                                    <p className="text-white/90 text-xs sm:text-sm">
+                                        Ophthalmologist | Last login: Today, 08:45 AM
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Mobile Action Buttons */}
+                            <div className="flex sm:hidden gap-2">
+                                <Button variant="ghost" className="p-1 rounded-full text-white hover:bg-white/20">
+                                    <Bell className="size-4" />
+                                </Button>
+                                <Button variant="ghost" className="p-1 rounded-full text-white hover:bg-white/20">
+                                    <Search className="size-4" />
+                                </Button>
+                                <Button
+                                    variant="ghost"
+                                    className="flex items-center gap-1 text-white hover:bg-white/20 text-xs"
+                                >
+                                    <FaSignOutAlt className="size-3" />
+                                </Button>
                             </div>
                         </div>
-                        <div className="flex items-center gap-1 sm:gap-2">
+
+                        {/* Desktop Action Buttons */}
+                        <div className="hidden sm:flex items-center gap-1 sm:gap-2">
                             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                                <Button variant="ghost" className="relative p-1 sm:p-2 rounded-full text-white hover:bg-white/20">
-                                    <Bell className="size-4 sm:size-5" />
-                                    <span className="absolute top-0 right-0 w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></span>
+                                <Button variant="ghost" className="relative p-2 rounded-full text-white hover:bg-white/20">
+                                    <Bell className="size-5" />
+                                    <span className="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full"></span>
                                 </Button>
                             </motion.div>
                             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                                <Button variant="ghost" className="p-1 sm:p-2 rounded-full text-white hover:bg-white/20">
-                                    <Search className="size-4 sm:size-5" />
+                                <Button variant="ghost" className="p-2 rounded-full text-white hover:bg-white/20">
+                                    <Search className="size-5" />
                                 </Button>
                             </motion.div>
                             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                                <Button 
-                                    variant="ghost" 
-                                    className="flex items-center gap-1 text-white hover:bg-white/20 text-xs sm:text-sm"
+                                <Button
+                                    variant="ghost"
+                                    className="flex items-center gap-1 text-white hover:bg-white/20 text-sm"
                                 >
-                                    <FaSignOutAlt className="size-3 sm:size-4" />
+                                    <FaSignOutAlt className="size-4" />
                                     <span className="hidden sm:inline">Logout</span>
                                 </Button>
                             </motion.div>
@@ -268,12 +295,13 @@ export function DoctorDashBoard() {
                     </div>
                 </motion.header>
 
+
                 {/* Stats Overview */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.1 }}
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6"
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6 "
                 >
                     {stats.map((stat, index) => (
                         <motion.div
@@ -282,23 +310,24 @@ export function DoctorDashBoard() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.3, delay: 0.1 + index * 0.1 }}
                             whileHover={{ y: -5 }}
-                            className="bg-white rounded-xl shadow-md p-3 sm:p-4 border border-[#00CF94]/20"
+                            className="bg-white rounded-xl shadow-md p-3 sm:p-4 border border-[#00CF94]/20 transition-transform"
                         >
                             <div className="flex justify-between items-start">
-                                <div>
-                                    <p className="text-gray-500 text-xs sm:text-sm">{stat.title}</p>
+                                <div className="flex-1 min-w-0">
+                                    <p className="text-gray-500 text-xs sm:text-sm truncate">{stat.title}</p>
                                     <h3 className="text-xl sm:text-2xl font-bold text-[#00694B] mt-1">{stat.value}</h3>
                                 </div>
-                                <div className="p-2 sm:p-3 rounded-full bg-[#E5FBF7] text-[#00CF94]">
+                                <div className="p-2 sm:p-3 rounded-full bg-[#E5FBF7] text-[#00CF94] shrink-0">
                                     {stat.icon}
                                 </div>
                             </div>
                             <p className="text-xs sm:text-sm mt-2 sm:mt-3 text-green-600 flex items-center">
-                                <span className="font-medium">{stat.change}</span> from yesterday
+                                <span className="font-medium">{stat.change}</span>&nbsp;from yesterday
                             </p>
                         </motion.div>
                     ))}
                 </motion.div>
+
 
                 {/* Cases Tabs */}
                 <motion.div
@@ -309,12 +338,12 @@ export function DoctorDashBoard() {
                 >
                     <Tabs defaultValue="openCases" className="w-full">
                         <div className="overflow-x-auto">
-                            <TabsList className="w-full bg-[#d4f3eb] p-1 rounded-lg shadow-inner min-w-max">
+                            <TabsList className="w-full bg-[#d4f3eb] p-2 rounded-lg shadow-inner min-w-max">
                                 <TabsTrigger
                                     value="openCases"
-                                    className="py-2 sm:py-3 rounded-md font-medium transition-all 
+                                    className="py-3 sm:py-4 rounded-md font-medium transition-all 
                    text-[#00694B] hover:bg-[#d4f3eb]
-                   data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#00694B] data-[state=active]:to-[#00CF94] 
+                   data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#0d0e0e] data-[state=active]:to-[#1b3a32] 
                    data-[state=active]:text-white
                    data-[state=active]:shadow-md px-3 sm:px-4"
                                     onClick={() => setActiveTab("openCases")}
@@ -330,9 +359,9 @@ export function DoctorDashBoard() {
 
                                 <TabsTrigger
                                     value="completedReports"
-                                    className="py-2 sm:py-3 rounded-md font-medium transition-all duration-200 ease-in-out
+                                    className="py-3 sm:py-4  rounded-md font-medium transition-all 
                    text-[#00694B] hover:bg-[#d4f3eb]
-                   data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#00694B] data-[state=active]:to-[#00CF94] 
+                   data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#0d0e0e] data-[state=active]:to-[#1b3a32] 
                    data-[state=active]:text-white
                    data-[state=active]:shadow-md px-3 sm:px-4"
                                     onClick={() => setActiveTab("completedReports")}
@@ -363,7 +392,7 @@ export function DoctorDashBoard() {
                                             <SelectItem value="low">Low Priority</SelectItem>
                                         </SelectContent>
                                     </Select>
-                                    <Button className="bg-[#00694B] hover:bg-[#00563F] text-white text-xs sm:text-sm px-2 sm:px-4">
+                                    <Button className="bg-gradient-to-r from-[#374642] to-[#00694B] hover:bg-[#00563F] text-white  text-xs sm:text-sm px-2 sm:px-4">
                                         <FilePlus2 className="mr-1 sm:mr-2 size-3 sm:size-4" />
                                         <span className="hidden sm:inline">New Case</span>
                                         <span className="sm:hidden">New</span>
@@ -373,11 +402,11 @@ export function DoctorDashBoard() {
                             <div className="rounded-xl border border-[#00CF94]/30 overflow-hidden">
                                 <div className="overflow-x-auto">
                                     <Table>
-                                        <TableHeader className="bg-gradient-to-r from-[#00694B] to-[#00a56e]">
+                                        <TableHeader className="bg-gradient-to-r from-[#171a19] to-[#296752]">
                                             <TableRow>
                                                 <TableHead className="text-white py-3 px-2 sm:px-4">Patient</TableHead>
                                                 <TableHead className="text-white py-3 px-2 sm:px-4 hidden sm:table-cell">Age</TableHead>
-                                                <TableHead className="text-white py-3 px-2 sm:px-4">Scan Time</TableHead>
+                                                <TableHead className="text-white py-3 px-2 sm:px-4 hidden sm:table-cell">Scan Time</TableHead>
                                                 <TableHead className="text-white py-3 px-2 sm:px-4">Priority</TableHead>
                                                 <TableHead className="text-right text-white py-3 px-2 sm:px-4">Action</TableHead>
                                             </TableRow>
@@ -395,7 +424,7 @@ export function DoctorDashBoard() {
                                                         </div>
                                                     </TableCell>
                                                     <TableCell className="hidden sm:table-cell">{patient.age}</TableCell>
-                                                    <TableCell>{patient.time}</TableCell>
+                                                    <TableCell className="hidden sm:table-cell">{patient.time}</TableCell>
                                                     <TableCell >
                                                         <Badge
                                                             variant={patient.priority === "High" ? "destructive" : patient.priority === "Medium" ? "secondary" : "outline"}
@@ -407,7 +436,8 @@ export function DoctorDashBoard() {
                                                     <TableCell className="text-right py-2 px-2 sm:px-4">
                                                         <Button
                                                             size="sm"
-                                                            className="bg-[#00694B] hover:bg-[#00563F] text-white text-xs px-2 sm:px-3"
+                                                            className="bg-gradient-to-r from-[#374642] to-[#00694B] hover:bg-[#00563F] text-white text-xs px-2 sm:px-3"
+
                                                             onClick={handleViewReport}
                                                         >
                                                             <span className="hidden sm:inline">View Report</span>
@@ -447,7 +477,7 @@ export function DoctorDashBoard() {
                             <div className="rounded-xl border border-[#00CF94]/30 overflow-hidden">
                                 <div className="overflow-x-auto">
                                     <Table>
-                                        <TableHeader className="bg-gradient-to-r from-[#00694B] to-[#00a56e]">
+                                        <TableHeader className="bg-gradient-to-r from-[#171a19] to-[#296752]">
                                             <TableRow>
                                                 <TableHead className="text-white py-3 px-2 sm:px-4">Patient</TableHead>
                                                 <TableHead className="text-white py-3 px-2 sm:px-4 hidden sm:table-cell">Age</TableHead>
@@ -471,7 +501,7 @@ export function DoctorDashBoard() {
                                                     </TableCell>
                                                     <TableCell className="hidden sm:table-cell">{patient.age}</TableCell>
                                                     <TableCell>
-                                                        <Badge 
+                                                        <Badge
                                                             variant={patient.status === "Completed" ? "default" : patient.status === "Reviewed" ? "secondary" : "outline"}
                                                             className="capitalize text-xs"
                                                         >
@@ -491,7 +521,7 @@ export function DoctorDashBoard() {
                                                         <div className="flex justify-end gap-1 sm:gap-2">
                                                             <Button
                                                                 size="sm"
-                                                                className="bg-[#00694B] hover:bg-[#00563F] text-white text-xs px-2 sm:px-3"
+                                                                className="bg-gradient-to-r from-[#374642] to-[#00694B] hover:bg-[#00563F] text-white  text-xs px-2 sm:px-3"
                                                                 onClick={handleViewReport}
                                                             >
                                                                 View
@@ -520,7 +550,7 @@ export function DoctorDashBoard() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
-                    className="mt-4 sm:mt-6 grid grid-cols-1 gap-4 sm:gap-6"
+                    className="mt-4  sm:mt-6 grid grid-cols-1 gap-4 sm:gap-6 mx-auto"
                 >
                     <Card className="p-3 sm:p-5 rounded-xl border border-[#00CF94]/30">
                         <h3 className="text-base sm:text-lg font-bold text-[#00694B] mb-3 sm:mb-4 flex items-center">
@@ -528,7 +558,7 @@ export function DoctorDashBoard() {
                         </h3>
                         <div className="space-y-3 sm:space-y-4">
                             {[1, 2, 3].map((item, index) => (
-                                <motion.div 
+                                <motion.div
                                     key={index}
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
@@ -546,14 +576,14 @@ export function DoctorDashBoard() {
                             ))}
                         </div>
                     </Card>
-                    
-                    <Card className="p-3 sm:p-5 rounded-xl border border-[#00CF94]/30">
+
+                    <Card className="    rounded-xl border border-[#00CF94]/30">
                         <h3 className="text-base sm:text-lg font-bold text-[#00694B] mb-3 sm:mb-4 flex items-center">
                             <Thermometer className="mr-2 text-[#00CF94] size-4 sm:size-5" /> Upcoming Appointments
                         </h3>
                         <div className="space-y-3 sm:space-y-4">
                             {[1, 2].map((item, index) => (
-                                <motion.div 
+                                <motion.div
                                     key={index}
                                     initial={{ opacity: 0, x: 20 }}
                                     animate={{ opacity: 1, x: 0 }}
@@ -584,7 +614,7 @@ export function DoctorDashBoard() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.4 }}
-                    className="mt-6 sm:mt-8 pt-4 pb-3 sm:pt-6 sm:pb-4 bg-gradient-to-r from-[#00694B] to-[#00a56e] text-white rounded-xl shadow-lg"
+                    className="mt-6 sm:mt-8 pt-4 pb-3 sm:pt-6 sm:pb-4 bg-gradient-to-r from-[#00694B] to-[#00a56e] text-white rounded-xl shadow-lg p-5"
                 >
                     <div className="max-w-7xl mx-auto px-3 sm:px-4">
                         <div className="flex flex-col md:flex-row justify-between items-center gap-3">
@@ -622,8 +652,8 @@ export function DoctorDashBoard() {
                                 <a href="#" className="hover:underline">Privacy Policy</a>
                                 <span className="hidden sm:inline">•</span>
                                 <a href="#" className="hover:underline">Contact Support</a>
-                                
-                              
+
+
                             </div>
                         </div>
                     </div>

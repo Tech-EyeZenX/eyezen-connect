@@ -216,6 +216,33 @@ export function NewPatientDialog() {
                                 </div>
                             </div>
 
+                            <div className="space-y-2 flex justify-between">
+                                <div className="w-1/2 space-y-2">
+                                    <Label htmlFor="email">Email</Label>
+                                    <Input
+                                        id="email"
+                                        name="email"
+                                        type="email"
+                                        placeholder="Enter patient email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <div className="w-1/2 space-y-2">
+                                    <Label htmlFor="dob">Date of Birth</Label>
+                                    <Input
+                                        type="date"
+                                        name="dob"
+                                        value={formData.dob}
+                                        onChange={handleChange}
+                                        className="w-full"
+                                        placeholder="Select date of birth"
+                                        id="dob"
+                                    />
+                                </div>
+                            </div>
+
+
                             {/* Visit Type */}
                             <div className="space-y-2">
                                 <Label htmlFor="visit-type">Visit Type</Label>
@@ -227,6 +254,7 @@ export function NewPatientDialog() {
                                     onChange={handleChange}
                                 />
                             </div>
+                           <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
 
                             {/* Select Eye */}
                             <div className="space-y-2">
@@ -246,6 +274,18 @@ export function NewPatientDialog() {
                                 </RadioGroup>
                             </div>
 
+                            {/* visual aucacity  */}
+                            <div className="space-y-2">
+                                <Label htmlFor="visual-acuity">Visual Acuity</Label>
+                                <Input
+                                    id="visual-acuity"
+                                    name="visualAcuity"
+                                    placeholder="Enter visual acuity (e.g., 20/20)"
+                                    value={formData.visualAcuity}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                           </div>
                             {/* File Upload Button */}
                             <div className="space-y-2">
                                 <Label>Upload Image</Label>
@@ -322,7 +362,29 @@ export function NewPatientDialog() {
                                     </DialogContent>
                                 </Dialog>
                             </div>
+                            {/* Blood group  */}
 
+                            <div className="space-y-2">
+                                <Label htmlFor="blood-group">Blood Group</Label>
+                                <Select
+                                    value={formData.bloodGroup}
+                                    onValueChange={(value) => setFormData({ ...formData, bloodGroup: value })}
+                                >
+                                    <SelectTrigger className="w-full h-12 text-left">
+                                        <SelectValue placeholder="Select blood group" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="A+">A+</SelectItem>
+                                        <SelectItem value="A-">A-</SelectItem>
+                                        <SelectItem value="B+">B+</SelectItem>
+                                        <SelectItem value="B-">B-</SelectItem>
+                                        <SelectItem value="O+">O+</SelectItem>
+                                        <SelectItem value="O-">O-</SelectItem>
+                                        <SelectItem value="AB+">AB+</SelectItem>
+                                        <SelectItem value="AB-">AB-</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
                             {/* Symptoms */}
                             <div className="space-y-3">
                                 <Label className="text-base font-medium">Symptoms Noted</Label>
@@ -494,6 +556,29 @@ export function NewPatientDialog() {
                                         <SelectItem value="1+">More than 1 year</SelectItem>
                                     </SelectContent>
                                 </Select>
+                            </div>
+
+                            {/* Emergency Contact name and Phone number */}
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="space-y-2">
+                                    <Label>Emergency Contact Name</Label>
+                                    <Input
+                                        placeholder="Enter name"
+                                        name="emergencyContactName"
+                                        value={formData.emergencyContactName}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label>Emergency Contact Phone</Label>
+                                    <Input
+                                        placeholder="Enter phone number"
+                                        name="emergencyContactPhone"
+                                        value={formData.emergencyContactPhone}
+                                        onChange={handleChange}
+                                    />
+                                </div>
                             </div>
                         </div>
 
