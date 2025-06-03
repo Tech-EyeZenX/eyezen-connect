@@ -341,11 +341,7 @@ export function DoctorDashBoard() {
                             <TabsList className="w-full bg-[#d4f3eb] p-2 rounded-lg shadow-inner min-w-max">
                                 <TabsTrigger
                                     value="openCases"
-                                    className="py-3 sm:py-4 rounded-md font-medium transition-all 
-                   text-[#00694B] hover:bg-[#d4f3eb]
-                   data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#0d0e0e] data-[state=active]:to-[#1b3a32] 
-                   data-[state=active]:text-white
-                   data-[state=active]:shadow-md px-3 sm:px-4"
+                                    className="py-3 sm:py-4 rounded-md font-medium transition-all bg-white px-3 sm:px-4"
                                     onClick={() => setActiveTab("openCases")}
                                 >
                                     <div className="flex items-center">
@@ -360,10 +356,7 @@ export function DoctorDashBoard() {
                                 <TabsTrigger
                                     value="completedReports"
                                     className="py-3 sm:py-4  rounded-md font-medium transition-all 
-                   text-[#00694B] hover:bg-[#d4f3eb]
-                   data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#0d0e0e] data-[state=active]:to-[#1b3a32] 
-                   data-[state=active]:text-white
-                   data-[state=active]:shadow-md px-3 sm:px-4"
+                   bg-white px-3 sm:px-4"
                                     onClick={() => setActiveTab("completedReports")}
                                 >
                                     <div className="flex items-center">

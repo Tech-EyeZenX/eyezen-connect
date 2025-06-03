@@ -8,6 +8,7 @@ import Auth from "./pages/Auth";
 import { PatientReport } from "./pages/PatientReport";
 import { FinalReport } from "./pages/FinalReport";
 import { DoctorDashBoard } from "./pages/DoctorDashBoard";
+import PatientPage from "./pages/PatientPage";
 
 
 
@@ -27,6 +28,7 @@ function App() {
         <Route path = "/doctor-dashboard" element = {<DoctorDashBoard/>}/>
         <Route path = "/patient-report" element = {<PatientReport/>}/>
         <Route path = "/patient-final-report" element = {<FinalReport/>}/>
+         <Route path = "/patients" element = {<PatientPage/>}/>
       </Routes>
     </div>
   );

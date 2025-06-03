@@ -54,7 +54,7 @@ const patients = [
         age: 48,
         scanTime: "11:30 AM",
         status: "Waiting",
-        action: "View Progress",
+        action: "In Progress",
     },
 ];
 
