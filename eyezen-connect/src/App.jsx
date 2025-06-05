@@ -9,6 +9,7 @@ import { PatientReport } from "./pages/PatientReport";
 import { FinalReport } from "./pages/FinalReport";
 import { DoctorDashBoard } from "./pages/DoctorDashBoard";
 import PatientPage from "./pages/PatientPage";
+import EyeScanAnalysis from "./components/EyeScanAnalysis1";
 
 
 
@@ -27,7 +28,7 @@ function App() {
         <Route path = "/auth" element = {<Auth/>}/>
         <Route path = "/doctor-dashboard" element = {<DoctorDashBoard/>}/>
         <Route path = "/patient-report" element = {<PatientReport/>}/>
-        <Route path = "/patient-final-report" element = {<FinalReport/>}/>
+        <Route path = "/patient-final-report" element = {<EyeScanAnalysis/>}/>
          <Route path = "/patients" element = {<PatientPage/>}/>
       </Routes>
     </div>

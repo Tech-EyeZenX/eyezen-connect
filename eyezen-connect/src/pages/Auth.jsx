@@ -8,6 +8,7 @@ import { Separator } from '@/components/ui/separator';
 
 import { Eye, EyeIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { FaGoogle } from 'react-icons/fa';
 function Auth() {
     const [activeTab, setActiveTab] = useState("login");
     const [role, setRole] = useState("patient");
@@ -77,6 +78,10 @@ function Auth() {
                                         <Button type="submit" onClick = {handleLogin} className="w-full bg-green-400 hover:bg-green-500 text-[#1A1512] font-medium">
                                             Login
                                         </Button>
+
+                                        <Button type = 'submit' onClick = {()=>console.log("Google Login")} className = 'w-full bg-[#4285F4] hover:bg-[#3367D6] text-white fonte-medium'>
+                                            <FaGoogle className='inline mr-2' />
+                                            Login With Google</Button>
                                     </form>
 
                                     <div className="mt-4 text-center">
@@ -123,6 +128,8 @@ function Auth() {
                                             <Input placeholder="Enter your full name" />
                                         </div>
 
+                                       
+
                                         <div className="grid grid-cols-2 gap-4">
                                             <div>
                                                 <label className="block mb-1 text-sm font-medium">Email</label>
@@ -136,12 +143,16 @@ function Auth() {
                                         </div>
 
                                         <Separator />
-
-
                                         <div>
                                             <label className="block mb-1 text-sm font-medium">Password</label>
                                             <Input type="password" placeholder="Choose a password" />
                                         </div>
+                                         {role!=='doctor' && (
+                                            <div>
+                                                <label className='block mb-1 text-sm font-medium'>Optical shop name</label>
+                                                <Input placeholder="Enter your optical shop name" />
+                                            </div>
+                                        )}
 
                                         <div>
                                             <label className='block mb-1 text-sm font-medium'>Optical Shop Registration Number</label>

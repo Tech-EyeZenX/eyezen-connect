@@ -21,9 +21,9 @@ export const EyeHealthSummary = () => {
         <div className="eye-summary-container w-full">
             <h2 className="summary-title">Eye Health Summary</h2>
             <div className="divider"></div>
-            
+
             <div>
-                <EyeScanInterface/>
+                <EyeScanInterface />
             </div>
 
             {/*Second image */}
@@ -31,17 +31,50 @@ export const EyeHealthSummary = () => {
             <h2 className="summary-title" style={{ marginTop: '20px' }}>Eye Scan Analysis</h2>
             <div className="divider"></div>
 
-            <div className="image-section">
+            <div className="image-section" style={{ position: 'relative' }}>
                 <img src="./eye1.png" alt="Eye Scan" className="eye-image" />
 
-                {/* Label: Pupil */}
-                <div className="label-container" style={{ top: '48%', left: '22%' }}>
-                    <div className="label-box">Pupil</div>
-                    <div className="dotted-line"></div>
+                {/* Pupil Label and Line */}
+                <div
+                    style={{
+                        position: 'absolute',
+                        left: '18vw',
+                        top: '25vh',
+                        backgroundColor: 'white',
+                        padding: '4px 8px',
+                        borderRadius: '6px',
+                        boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
+                        fontWeight: 'bold',
+                        color: 'black',
+                        zIndex: 3,
+                    }}
+                >
+                    Pupil
+                </div>
+                <div
+                    style={{
+                        position: 'absolute',
+                        top: '10%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                    }}
+                >
+                    <div
+                        style={{
+                            width: '150px',
+                            height: '2px',
+                            borderTop: '3px dotted green',
+                            position: 'absolute',
+                            top: '22vh',
+                            left: '-16vw',
+                            transform: 'translateY(-50%)',
+                            zIndex: 2,
+                        }}
+                    ></div>
                 </div>
 
-                {/* Color Pickers Section */}
-                <div className="marker-section" style={{ top: '60%', left: '28%' }}>
+                {/* Pupillary Reflex & Dilation Color Pickers */}
+                <div className="marker-section" style={{ position: 'absolute', top: '60%', left: '28%' }}>
                     {["Pupillary Reflex", "Pupillary Dilation"].map((box, index) => (
                         <div key={index} className="marker-item">
                             <span>{box}</span>
@@ -76,21 +109,17 @@ export const EyeHealthSummary = () => {
                         transform: 'translate(-50%, -50%)',
                     }}
                 >
-                    {/* Green Dotted Line */}
                     <div
                         style={{
                             width: '120px',
                             height: '2px',
-                            borderTop: '2px dotted green',
+                            borderTop: '3px dotted green',
                             position: 'absolute',
                             top: '50%',
                             left: 0,
-                            transform: 'translateY(-50%)',
                             zIndex: 2,
                         }}
                     ></div>
-
-                    {/* Conjunctiva Label at the end of the line */}
                     <div
                         style={{
                             position: 'absolute',
@@ -150,8 +179,7 @@ export const EyeHealthSummary = () => {
                     ))}
                 </div>
 
-
-                {/* Marker: Cornea */}
+                {/* Cornea Marker */}
                 <div
                     style={{
                         position: 'absolute',
@@ -160,12 +188,10 @@ export const EyeHealthSummary = () => {
                         transform: 'translate(-50%, -50%)',
                     }}
                 >
-                    {/* First Dotted Line - Horizontal */}
                     <div
                         style={{
                             width: '60px',
-                            height: '2px',
-                            borderTop: '2px dotted green',
+                            borderTop: '3px dotted green',
                             position: 'absolute',
                             top: '50%',
                             left: 0,
@@ -173,13 +199,10 @@ export const EyeHealthSummary = () => {
                             zIndex: 2,
                         }}
                     ></div>
-
-                    {/* Second Dotted Line - Diagonal */}
                     <div
                         style={{
                             width: '200px',
-                            height: '2px',
-                            borderTop: '2px dotted green',
+                            borderTop: '3px dotted green',
                             position: 'absolute',
                             top: '50%',
                             left: '-10px',
@@ -188,8 +211,6 @@ export const EyeHealthSummary = () => {
                             zIndex: 2,
                         }}
                     ></div>
-
-                    {/* Label at the end of diagonal line */}
                     <div
                         style={{
                             position: 'absolute',
@@ -208,8 +229,7 @@ export const EyeHealthSummary = () => {
                     </div>
                 </div>
 
-
-                {/* Input Boxes and Color Pickers Below Cornea Marker (2 Input Boxes) */}
+                {/* Cornea Input Boxes */}
                 <div
                     style={{
                         position: 'absolute',
@@ -226,11 +246,7 @@ export const EyeHealthSummary = () => {
                             key={index}
                             style={{ display: 'flex', alignItems: 'center', gap: '10px', position: 'relative' }}
                         >
-                            <div key={index} className="marker-item">
-                                <span>{box}</span>
-                            </div>
-
-                            {/* Clickable Transparent Color Box */}
+                            <span>{box}</span>
                             <div
                                 style={{
                                     width: '24px',
@@ -244,7 +260,6 @@ export const EyeHealthSummary = () => {
                                 onClick={() => setShowPicker(showPicker === box ? null : box)}
                             ></div>
 
-                            {/* Color Picker */}
                             {showPicker === box && (
                                 <div
                                     style={{
@@ -280,10 +295,7 @@ export const EyeHealthSummary = () => {
                     ))}
                 </div>
 
-
-
-
-                {/* Marker: Cornea */}
+                {/* Eyelids Marker */}
                 <div
                     style={{
                         position: 'absolute',
@@ -292,12 +304,10 @@ export const EyeHealthSummary = () => {
                         transform: 'translate(-50%, -50%)',
                     }}
                 >
-                    {/* First Dotted Line - Horizontal */}
                     <div
                         style={{
                             width: '100px',
-                            height: '2px',
-                            borderTop: '2px dotted green',
+                            borderTop: '3px dotted green',
                             position: 'absolute',
                             top: '5px',
                             left: '-280px',
@@ -305,13 +315,10 @@ export const EyeHealthSummary = () => {
                             zIndex: 2,
                         }}
                     ></div>
-
-                    {/* Second Dotted Line - Diagonal */}
                     <div
                         style={{
-                            width: '250px',
-                            height: '2px',
-                            borderTop: '2px dotted green',
+                            width: '240px',
+                            borderTop: '3px dotted green',
                             position: 'absolute',
                             top: '10%',
                             left: '-170px',
@@ -320,8 +327,6 @@ export const EyeHealthSummary = () => {
                             zIndex: 2,
                         }}
                     ></div>
-
-                    {/* Label at the end of diagonal line */}
                     <div
                         style={{
                             position: 'absolute',
@@ -340,8 +345,7 @@ export const EyeHealthSummary = () => {
                     </div>
                 </div>
 
-
-                {/* Input Boxes and Color Pickers Below Cornea Marker (2 Input Boxes) */}
+                {/* Eyelids Input Boxes */}
                 <div
                     style={{
                         position: 'absolute',
@@ -353,16 +357,16 @@ export const EyeHealthSummary = () => {
                         gap: '10px',
                     }}
                 >
-                    {["Eye Dryness (meibomian Glands)", "Normal Movements (any ptosis)", "Swelling"].map((box, index) => (
+                    {[
+                        "Eye Dryness (meibomian Glands)",
+                        "Normal Movements (any ptosis)",
+                        "Swelling",
+                    ].map((box, index) => (
                         <div
                             key={index}
                             style={{ display: 'flex', alignItems: 'center', gap: '10px', position: 'relative' }}
                         >
-                            <div key={index} className="marker-item">
-                                <span>{box}</span>
-                            </div>
-
-                            {/* Clickable Transparent Color Box */}
+                            <span>{box}</span>
                             <div
                                 style={{
                                     width: '24px',
@@ -376,7 +380,6 @@ export const EyeHealthSummary = () => {
                                 onClick={() => setShowPicker(showPicker === box ? null : box)}
                             ></div>
 
-                            {/* Color Picker */}
                             {showPicker === box && (
                                 <div
                                     style={{
@@ -414,6 +417,7 @@ export const EyeHealthSummary = () => {
             </div>
 
 
+
             {/*Third Image */}
 
 
@@ -436,7 +440,7 @@ export const EyeHealthSummary = () => {
                         style={{
                             width: '100px',
                             height: '2px',
-                            borderTop: '2px dotted green',
+                            borderTop: '3px dotted green',
                             position: 'absolute',
                             top: '2px',
                             left: '-280px',
@@ -450,11 +454,11 @@ export const EyeHealthSummary = () => {
                         style={{
                             width: '200px',
                             height: '2px',
-                            borderTop: '2px dotted green',
+                            borderTop: '3px dotted green',
                             position: 'absolute',
                             top: '10%',
                             left: '-170px',
-                            transform: 'rotate(40deg)',
+                            transform: 'rotate(45deg)',
                             transformOrigin: 'left center',
                             zIndex: 2,
                         }}
@@ -467,8 +471,8 @@ export const EyeHealthSummary = () => {
                 <div
                     style={{
                         position: 'absolute',
-                        top: '10%',
-                        left: '240px',
+                        top: '4vh',
+                        left: '12vw',
                         transform: 'translateX(-50%)',
                         display: 'flex',
                         flexDirection: 'column',
@@ -534,12 +538,65 @@ export const EyeHealthSummary = () => {
                     ))}
                 </div>
 
+                <div className="label-container" style={{ top: '48%', left: '22%' }}>
+                    <div
+                        style={{
+                            width: '15vw',
+                            height: '2px',
+                            borderTop: '3px dotted green',
+                            position: 'absolute',
+                            top: '12vh',
+                            left: '1vw',
+                            transform: 'translateY(-50%)',
+                            rotate: '342deg',
+                            zIndex: 2,
+                        }}
 
+
+                    ></div>
+
+                    <div className="marker-section" style={{ top: '20vh', left: '-6vw' }}>
+                        {["AV Crossing", "Vascular Tortuosity", "Hypertension Signs"].map((box, index) => (
+                            <div key={index} className="marker-item">
+                                <span>{box}</span>
+                                <div
+                                    className="color-box"
+                                    style={{ backgroundColor: selectedColor[box] }}
+                                    onClick={() => setShowPicker(showPicker === box ? null : box)}
+                                ></div>
+
+                                {showPicker === box && (
+                                    <div className="color-picker">
+                                        {["red", "blue", "green", "yellow"].map((color) => (
+                                            <div
+                                                key={color}
+                                                className="color-option"
+                                                style={{ backgroundColor: color }}
+                                                onClick={() => handleColorChange(box, color)}
+                                            ></div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
 
                 {/* Label: Pupil */}
                 <div className="label-container" style={{ top: '48%', left: '22%' }}>
-                    {/* <div className="label-box">Pupil</div> */}
-                    <div className="dotted-line" style={{ width: "410px" }}></div>
+
+                    <div
+                        style={{
+                            width: '20vw',
+                            height: '2px',
+                            borderTop: '3px dotted green',
+                            position: 'absolute',
+                            top: '1vh',
+                            left: '1vw',
+                            transform: 'translateY(-50%)',
+                            zIndex: 2,
+                        }}
+                    ></div>
                 </div>
 
                 {/* Color Pickers Section */}
@@ -569,14 +626,25 @@ export const EyeHealthSummary = () => {
                     ))}
                 </div>
 
-                {/* Label: Pupil */}
+                {/*Thinkness of vessels */}
                 <div className="label-container" style={{ top: '65%', left: '50%' }}>
                     {/* <div className="label-box">Pupil</div> */}
-                    <div className="dotted-line" style={{ width: "200px" }}></div>
+                    <div
+                        style={{
+                            width: '15vw',
+                            height: '2px',
+                            borderTop: '3px dotted green',
+                            position: 'absolute',
+                            top: '-1vh',
+                            right: '-15vw',
+                            transform: 'translateY(-50deg)',
+                            zIndex: 2,
+                        }}
+                    ></div>
                 </div>
 
                 {/* Color Pickers Section */}
-                <div className="marker-section" style={{ top: '62%', left: '75%' }}>
+                <div className="marker-section" style={{ top: '30vh', left: '60vw' }}>
                     {["Thickening of vessels", " Microaneurysm", "Hemorrhages", "Exudates"].map((box, index) => (
                         <div key={index} className="marker-item">
                             <span>{box}</span>
@@ -604,12 +672,23 @@ export const EyeHealthSummary = () => {
 
                 {/* Label: Pupil */}
                 <div className="label-container" style={{ top: '28%', left: '52%' }}>
-                    {/* <div className="label-box">Pupil</div> */}
-                    <div className="dotted-line" style={{ width: "200px" }}></div>
+                    <div
+                        style={{
+                            width: '12vw',
+                            height: '2px',
+                            borderTop: '3px dotted green',
+                            position: 'absolute',
+                            top: '1vh',
+                            left: '1vw',
+                            transform: 'translateY(-50%)',
+                            zIndex: 2,
+                        }}>
+
+                    </div>
                 </div>
 
                 {/* Color Pickers Section */}
-                <div className="marker-section" style={{ top: '25%', left: '77%' }}>
+                <div className="marker-section" style={{ top: '27%', left: '77%' }}>
                     {["Neovascularization"].map((box, index) => (
                         <div key={index} className="marker-item">
                             <span>{box}</span>
@@ -635,38 +714,7 @@ export const EyeHealthSummary = () => {
                     ))}
                 </div>
 
-                {/* Label: Pupil */}
-                <div className="label-container" style={{ top: '87%', left: '30%', transform: 'rotate(-20deg)' }}>
-                    {/* <div className="label-box">Pupil</div> */}
-                    <div className="dotted-line" style={{ width: "180px" }}></div>
-                </div>
 
-                {/* Color Pickers Section */}
-                <div className="marker-section" style={{ top: '80%', left: '20%' }}>
-                    {["AV Crossing", "Vascular Tortuosity", "Hypertension Signs"].map((box, index) => (
-                        <div key={index} className="marker-item">
-                            <span>{box}</span>
-                            <div
-                                className="color-box"
-                                style={{ backgroundColor: selectedColor[box] }}
-                                onClick={() => setShowPicker(showPicker === box ? null : box)}
-                            ></div>
-
-                            {showPicker === box && (
-                                <div className="color-picker">
-                                    {["red", "blue", "green", "yellow"].map((color) => (
-                                        <div
-                                            key={color}
-                                            className="color-option"
-                                            style={{ backgroundColor: color }}
-                                            onClick={() => handleColorChange(box, color)}
-                                        ></div>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-                    ))}
-                </div>
 
                 <div
                     style={{
