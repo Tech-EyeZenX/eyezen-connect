@@ -121,9 +121,7 @@ export function ReportStatusTable() {
                 </Table>
             </div>
 
-            <div>
-                <NewPatientDialog />
-            </div>
+          
         </div>
     );
 }

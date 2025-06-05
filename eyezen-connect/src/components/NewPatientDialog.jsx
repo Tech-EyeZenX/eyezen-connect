@@ -135,12 +135,12 @@ export function NewPatientDialog() {
     };
 
     return (
-        <div className="flex justify-center mt-6 w-[90%]">
+        <div className="flex justify-center mt-2 w-[90%]">
             <ToastContainer />
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogTrigger asChild>
-                    <Button className="bg-[#00B07E] hover:bg-[#00B07E]/70 text-white px-6 py-2 rounded-md">
-                        <Plus className="h-4 w-4 mr-2" /> Add Patient
+                    <Button className="text-sm" variant = "outline">
+                       Add Patient
                     </Button>
                 </DialogTrigger>
 

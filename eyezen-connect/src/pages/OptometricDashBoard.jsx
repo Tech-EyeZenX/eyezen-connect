@@ -27,6 +27,7 @@ import {
     LogOut
 } from "lucide-react";
 import { ReportStatusTable } from '../components/ReportStatusTable';
+import { NewPatientDialog } from '../components/NewPatientDialog';
 
 const AnimatedCard = ({ children, delay = 0 }) => (
     <motion.div
@@ -42,7 +43,7 @@ export function OptometricDashBoard() {
     const [isOpen, setIsOpen] = useState(false);
     const [activePath, setActivePath] = useState('/dashboard');
     const location = useLocation();
-    
+
     useEffect(() => {
         setActivePath(location.pathname);
     }, [location]);
@@ -83,29 +84,28 @@ export function OptometricDashBoard() {
                             <Link
                                 key={item.path}
                                 to={item.path}
-                                className={`flex items-center gap-3 rounded-lg px-3 py-3 text-white/90 transition-all duration-200 group ${
-                                    activePath === item.path 
-                                        ? 'bg-white/20 text-white shadow-inner' 
+                                className={`flex items-center gap-3 rounded-lg px-3 py-3 text-white/90 transition-all duration-200 group ${activePath === item.path
+                                        ? 'bg-white/20 text-white shadow-inner'
                                         : 'hover:bg-white/10 hover:text-white'
-                                }`}
+                                    }`}
                             >
                                 <item.icon className="h-5 w-5 text-white/80 group-hover:text-white" />
                                 <span className="text-sm font-medium">{item.label}</span>
                             </Link>
                         ))}
                     </nav>
-                    
+
                     {/* Footer */}
                     <div className="mt-auto pt-4 border-t border-white/20">
-                        <Link 
-                            to="/help" 
+                        <Link
+                            to="/help"
                             className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-white/90 hover:bg-white/10 transition-colors"
                         >
                             <HelpCircle className="h-5 w-5" />
                             <span className="text-sm">Help Center</span>
                         </Link>
-                        <Link 
-                            to="/logout" 
+                        <Link
+                            to="/logout"
                             className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-white/90 hover:bg-white/10 transition-colors"
                         >
                             <LogOut className="h-5 w-5" />
@@ -122,11 +122,10 @@ export function OptometricDashBoard() {
                         <Link
                             key={item.path}
                             to={item.path}
-                            className={`flex flex-col items-center justify-center p-2 rounded-lg text-xs ${
-                                activePath === item.path 
-                                    ? 'text-[#00694B] bg-[#E5FBF7]' 
+                            className={`flex flex-col items-center justify-center p-2 rounded-lg text-xs ${activePath === item.path
+                                    ? 'text-[#00694B] bg-[#E5FBF7]'
                                     : 'text-gray-500'
-                            }`}
+                                }`}
                         >
                             <item.icon className="h-5 w-5 mb-1" />
                             <span>{item.label.split(' ')[0]}</span>
@@ -178,11 +177,10 @@ export function OptometricDashBoard() {
                                             <SheetClose key={item.path} asChild>
                                                 <Link
                                                     to={item.path}
-                                                    className={`flex items-center gap-3 rounded-lg px-3 py-3 my-1 text-white/90 transition-colors ${
-                                                        activePath === item.path 
-                                                            ? 'bg-white/20 text-white' 
+                                                    className={`flex items-center gap-3 rounded-lg px-3 py-3 my-1 text-white/90 transition-colors ${activePath === item.path
+                                                            ? 'bg-white/20 text-white'
                                                             : 'hover:bg-white/10'
-                                                    }`}
+                                                        }`}
                                                 >
                                                     <item.icon className="h-5 w-5" />
                                                     <span className="text-sm font-medium">{item.label}</span>
@@ -190,12 +188,12 @@ export function OptometricDashBoard() {
                                             </SheetClose>
                                         ))}
                                     </nav>
-                                    
+
                                     {/* Footer */}
                                     <div className="p-4 border-t border-white/20">
                                         <SheetClose asChild>
-                                            <Link 
-                                                to="/help" 
+                                            <Link
+                                                to="/help"
                                                 className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-white/90 hover:bg-white/10 mb-2"
                                             >
                                                 <HelpCircle className="h-5 w-5" />
@@ -203,8 +201,8 @@ export function OptometricDashBoard() {
                                             </Link>
                                         </SheetClose>
                                         <SheetClose asChild>
-                                            <Link 
-                                                to="/logout" 
+                                            <Link
+                                                to="/logout"
                                                 className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-white/90 hover:bg-white/10"
                                             >
                                                 <LogOut className="h-5 w-5" />
@@ -284,10 +282,12 @@ export function OptometricDashBoard() {
                     <h2 className="text-lg font-semibold text-gray-800 mb-4">Quick Actions</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
 
-                        <Button className="flex flex-col items-center justify-center h-24 gap-2 p-2 bg-[#EBF5FF] hover:bg-[#d6e9ff] border border-[#3B82F6]">
-                            <User className="h-6 w-6 text-blue-600" />
-                            <span className="text-sm text-black">Add Patient</span>
-                        </Button>
+                        <div className="flex flex-col items-center justify-center h-24 gap-2 p-2 bg-[#EBF5FF] hover:bg-[#d6e9ff] border border-[#3B82F6]">
+                            <User className="h-8 w-8 text-blue-600" />
+                            <div>
+                                <NewPatientDialog />
+                            </div>
+                        </div>
                         <Button className="flex flex-col items-center justify-center h-24 gap-2 p-2 bg-[#FEF6E7] hover:bg-[#fceecd] border border-[#F59E0B]">
                             <ClipboardCheck className="h-6 w-6 text-amber-600" />
                             <span className="text-sm text-black">Review Tests</span>
