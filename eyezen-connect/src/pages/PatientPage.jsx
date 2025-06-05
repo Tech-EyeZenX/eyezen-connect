@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { LayoutDashboard } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
@@ -40,7 +41,8 @@ import { Button } from '@/components/ui/button';
 
 import { Badge } from '@/components/ui/badge';
 
-
+import { format } from 'date-fns';
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 
 
@@ -53,7 +55,7 @@ import {
     Eye,
     FileText,
     MoreVertical,
-    Calendar,
+    Calendar as CalendarIcon,
     Phone,
     Mail,
     MapPin,
@@ -141,6 +143,7 @@ const PatientPage = () => {
     const [sortField, setSortField] = useState('name');
     const [sortDirection, setSortDirection] = useState('asc');
     const [searchTerm, setSearchTerm] = useState('');
+    const [date, setDate] = useState(new Date());
 
     // Sort patients
     const sortedPatients = [...patients].sort((a, b) => {
@@ -214,14 +217,14 @@ const PatientPage = () => {
 
                     {/* Filters and Search */}
                     <AnimatedCard delay={0.1}>
-                        <Card className="p-4 mb-6">
-                            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <Card className="p-6 mb-6">
+                            <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
                                 <div className="md:col-span-2">
                                     <div className="relative">
-                                        <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                                         <Input
                                             placeholder="Search patients by name, email, or ID..."
-                                            className="pl-10"
+                                            className="pl-10 w-full"
                                             value={searchTerm}
                                             onChange={(e) => setSearchTerm(e.target.value)}
                                         />
@@ -229,7 +232,7 @@ const PatientPage = () => {
                                 </div>
 
                                 <Select>
-                                    <SelectTrigger>
+                                    <SelectTrigger className="w-full">
                                         <Filter size={16} className="mr-2 text-gray-500" />
                                         <SelectValue placeholder="Filter by status" />
                                     </SelectTrigger>
@@ -242,7 +245,7 @@ const PatientPage = () => {
                                 </Select>
 
                                 <Select>
-                                    <SelectTrigger>
+                                    <SelectTrigger className="w-full">
                                         <SelectValue placeholder="Sort by" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -252,6 +255,28 @@ const PatientPage = () => {
                                         <SelectItem value="oldest">Oldest</SelectItem>
                                     </SelectContent>
                                 </Select>
+
+                                <Popover>
+                                    <PopoverTrigger asChild>
+                                        <Button
+                                            variant="outline"
+                                            className="w-full text-[#008A60] border-[#008A60] hover:bg-[#E5FBF7]"
+                                        >
+                                            <CalendarIcon className='mr-2 h-4 w-4' />
+                                            {date ? format(date, 'PPP') : 'Pick a date'}
+                                        </Button>
+                                    </PopoverTrigger>
+                                    <PopoverContent className="w-auto p-0">
+                                        <Calendar
+                                            mode="single"
+                                            selected={date}
+                                            onSelect={setDate}
+                                            intitialFocus
+                                            className="border border-[#E5FBF7] rounded-md"
+                                        />
+                                    </PopoverContent>
+                                </Popover>
+
                             </div>
                         </Card>
                     </AnimatedCard>

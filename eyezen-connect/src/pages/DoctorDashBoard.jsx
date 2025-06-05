@@ -82,10 +82,10 @@ export function DoctorDashBoard() {
 
     const navItems = [
         { path: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
-        { path: "/diagnosis-result", icon: ClipboardList, label: "Diagnosis Result" },
+        { path: "/patient-history", icon: ClipboardList, label: "Patient History" },
         { path: "/test-results", icon: ClipboardCheck, label: "Test Results" },
         { path: "/telephthal-tools", icon: Video, label: "Telephthal Tools" },
-        { path: "/treatment-plan", icon: ClipboardEdit, label: "Treatment Plan" },
+        { path: "/treatment-plan", icon: ClipboardEdit, label: "Management Plan" },
         { path: "/referrals", icon: Share2, label: "Referrals" },
         { path: "/billing-tools", icon: DollarSign, label: "Billing Tools" }
     ];
@@ -385,7 +385,7 @@ export function DoctorDashBoard() {
                                             <SelectItem value="low">Low Priority</SelectItem>
                                         </SelectContent>
                                     </Select>
-                                    <Button className="bg-gradient-to-r from-[#374642] to-[#00694B] hover:bg-[#00563F] text-white  text-xs sm:text-sm px-2 sm:px-4">
+                                    <Button className="bg-black/80 hover:bg-black text-white  text-xs sm:text-sm px-2 sm:px-4">
                                         <FilePlus2 className="mr-1 sm:mr-2 size-3 sm:size-4" />
                                         <span className="hidden sm:inline">New Case</span>
                                         <span className="sm:hidden">New</span>
@@ -395,7 +395,7 @@ export function DoctorDashBoard() {
                             <div className="rounded-xl border border-[#00CF94]/30 overflow-hidden">
                                 <div className="overflow-x-auto">
                                     <Table>
-                                        <TableHeader className="bg-gradient-to-r from-[#171a19] to-[#296752]">
+                                        <TableHeader className="bg-black/80">
                                             <TableRow>
                                                 <TableHead className="text-white py-3 px-2 sm:px-4">Patient</TableHead>
                                                 <TableHead className="text-white py-3 px-2 sm:px-4 hidden sm:table-cell">Age</TableHead>
@@ -429,7 +429,7 @@ export function DoctorDashBoard() {
                                                     <TableCell className="text-right py-2 px-2 sm:px-4">
                                                         <Button
                                                             size="sm"
-                                                            className="bg-gradient-to-r from-[#374642] to-[#00694B] hover:bg-[#00563F] text-white text-xs px-2 sm:px-3"
+                                                            className="bg-black/80 hover:bg-black  text-white text-xs px-2 sm:px-3"
 
                                                             onClick={handleViewReport}
                                                         >
@@ -470,7 +470,7 @@ export function DoctorDashBoard() {
                             <div className="rounded-xl border border-[#00CF94]/30 overflow-hidden">
                                 <div className="overflow-x-auto">
                                     <Table>
-                                        <TableHeader className="bg-gradient-to-r from-[#171a19] to-[#296752]">
+                                        <TableHeader className="bg-black/80 hover:bg-black">
                                             <TableRow>
                                                 <TableHead className="text-white py-3 px-2 sm:px-4">Patient</TableHead>
                                                 <TableHead className="text-white py-3 px-2 sm:px-4 hidden sm:table-cell">Age</TableHead>
@@ -514,7 +514,7 @@ export function DoctorDashBoard() {
                                                         <div className="flex justify-end gap-1 sm:gap-2">
                                                             <Button
                                                                 size="sm"
-                                                                className="bg-gradient-to-r from-[#374642] to-[#00694B] hover:bg-[#00563F] text-white  text-xs px-2 sm:px-3"
+                                                                className="bg-black/80 hover:bg-black text-white  text-xs px-2 sm:px-3"
                                                                 onClick={handleViewReport}
                                                             >
                                                                 View
