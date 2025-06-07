@@ -71,7 +71,10 @@ import {
     Search,
     HeartPulse,
     FilePlus2,
-    FileCheck2
+    FileCheck2,
+    DollarSignIcon,
+    LogOut,
+    Contact
 } from "lucide-react";
 import { FaSignOutAlt } from 'react-icons/fa';
 
@@ -83,11 +86,10 @@ export function DoctorDashBoard() {
     const navItems = [
         { path: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
         { path: "/patient-history", icon: ClipboardList, label: "Patient History" },
-        { path: "/test-results", icon: ClipboardCheck, label: "Test Results" },
-        { path: "/telephthal-tools", icon: Video, label: "Telephthal Tools" },
-        { path: "/treatment-plan", icon: ClipboardEdit, label: "Management Plan" },
         { path: "/referrals", icon: Share2, label: "Referrals" },
-        { path: "/billing-tools", icon: DollarSign, label: "Billing Tools" }
+        { path: "/earnings", icon: DollarSignIcon, label: "Earnings" },
+        { path: "/profile", icon: User, label: "Settings" }
+
     ];
 
     const assignedCases = [
@@ -158,12 +160,20 @@ export function DoctorDashBoard() {
                         ))}
                     </nav>
                     <div className="mt-auto pt-4 border-t border-white/20">
+
                         <Link
-                            to="/settings"
+                            to="/contact-us"
                             className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-white/90 hover:bg-white/10 hover:text-white transition-colors duration-200 group"
                         >
-                            <Settings className="h-5 w-5 text-white/80 group-hover:text-white" />
-                            <span className="text-sm font-medium">Settings</span>
+                            <Contact className="h-5 w-5 text-white/80 group-hover:text-white" />
+                            <span className="text-sm font-medium">Contact Us</span>
+                        </Link>
+                        <Link
+                            to="/logout"
+                            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-white/90 hover:bg-white/10 hover:text-white transition-colors duration-200 group"
+                        >
+                            <LogOut className="h-5 w-5 text-white/80 group-hover:text-white" />
+                            <span className="text-sm font-medium">LogOut</span>
                         </Link>
                     </div>
                 </div>
@@ -385,11 +395,7 @@ export function DoctorDashBoard() {
                                             <SelectItem value="low">Low Priority</SelectItem>
                                         </SelectContent>
                                     </Select>
-                                    <Button className="bg-black/80 hover:bg-black text-white  text-xs sm:text-sm px-2 sm:px-4">
-                                        <FilePlus2 className="mr-1 sm:mr-2 size-3 sm:size-4" />
-                                        <span className="hidden sm:inline">New Case</span>
-                                        <span className="sm:hidden">New</span>
-                                    </Button>
+
                                 </div>
                             </div>
                             <div className="rounded-xl border border-[#00CF94]/30 overflow-hidden">
@@ -460,11 +466,7 @@ export function DoctorDashBoard() {
                                             <SelectItem value="archived">Archived</SelectItem>
                                         </SelectContent>
                                     </Select>
-                                    <Button variant="outline" className="border-[#00694B] text-[#00694B] hover:bg-[#E5FBF7] text-xs sm:text-sm px-2 sm:px-4">
-                                        <History className="mr-1 sm:mr-2 size-3 sm:size-4" />
-                                        <span className="hidden sm:inline">View History</span>
-                                        <span className="sm:hidden">History</span>
-                                    </Button>
+
                                 </div>
                             </div>
                             <div className="rounded-xl border border-[#00CF94]/30 overflow-hidden">

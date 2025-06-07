@@ -51,11 +51,8 @@ export function OptometricDashBoard() {
     const navItems = [
         { path: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
         { path: "/patients", icon: User, label: "Patients" },
-        { path: "/diagnosis-result", icon: ClipboardList, label: "Diagnosis" },
-        { path: "/test-results", icon: ClipboardCheck, label: "Test Results" },
-        { path: "/treatment-plan", icon: ClipboardEdit, label: "Treatment" },
-        { path: "/referrals", icon: Share2, label: "Referrals" },
-        { path: "/billing-tools", icon: DollarSign, label: "Billing" },
+        { path: "/refer-doctor", icon: Share2, label: "Refer a doctor" },
+        { path: "/payment", icon: DollarSign, label: "Payment" },
         { path: "/profile", icon: Settings, label: "Settings" },
     ];
 
